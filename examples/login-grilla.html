@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inicio de sesión con grilla · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/grid/element-grid.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* La grilla viva llena la pantalla y abre fotos alrededor; la tarjeta queda a salvo con data-grid-avoid */
+  body{background:#f7f3ef}
+  .scene{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:96px 16px 80px;--eui-grid-cell:#efe7e0}
+  .scene.eui-grid>.brand{position:absolute;top:28px;left:clamp(16px,4vw,48px);z-index:3;display:flex;align-items:center;gap:10px;font-weight:500;letter-spacing:-.01em}
+  .brand i{width:12px;height:19px;background:#dd6330;clip-path:polygon(25.7% 0,74.3% 0,74.3% 13.4%,100% 13.4%,100% 86.6%,74.3% 86.6%,74.3% 100%,25.7% 100%,25.7% 86.6%,0 86.6%,0 13.4%,25.7% 13.4%)}
+  .card{width:min(100%,400px);display:grid;gap:14px;padding:clamp(26px,3.2vw,38px);background:#fff;border:1px solid rgba(21,21,42,.1);box-shadow:0 30px 80px -40px rgba(21,21,42,.35)}
+  .card h1{margin:0;font-size:clamp(34px,3.6vw,46px);font-weight:200;line-height:.95;letter-spacing:-.05em}
+  .card h1 em{font-style:normal;color:#dd6330}
+  .card p{margin:0 0 6px;color:#55566f}
+  label{display:grid;gap:7px;font-size:14px;color:#55566f}
+  input{height:48px;padding:0 16px;border:1px solid rgba(21,21,42,.16);background:#fbf9f7;font:inherit;color:#15152a}
+  input:focus{outline:none;border-color:#dd6330;box-shadow:0 0 0 4px rgba(221,99,48,.16)}
+  .submit{height:50px;border:0;background:#dd6330;color:#15152a;font:500 16px/1 'Hanken Grotesk',sans-serif;cursor:pointer;transition:background .25s,color .25s}
+  .submit:hover{background:#15152a;color:#fff}
+  .row{display:flex;justify-content:space-between;font-size:13.5px;color:#55566f}
+  .row a{color:#15152a}
+</style>
+<script defer src="../components/grid/element-grid.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="login" data-variant="grilla">
+<main class="scene eui-grid" data-element-grid data-grid-mask="edges" data-grid-interval="2400" data-grid-cell="88" data-grid-interactive="true">
+  <template data-grid-items>
+    <img src="../assets/photos/helecho.webp" alt="">
+    <img src="../assets/photos/arquitectura.webp" alt="">
+    <img src="../assets/photos/petalos.webp" alt="">
+    <img src="../assets/photos/cumbre.webp" alt="">
+  </template>
+  <span class="brand"><i></i>Estudio Norte</span>
+  <form class="card" id="f" data-grid-avoid>
+    <h1>Tu espacio <em>de trabajo.</em></h1>
+    <p>Inicia sesión para ver tus proyectos.</p>
+    <label>Correo electrónico<input type="email" placeholder="nombre@correo.com" autocomplete="email" required></label>
+    <label>Contraseña<input type="password" placeholder="••••••••" autocomplete="current-password" required minlength="4"></label>
+    <button class="submit" type="submit">Entrar</button>
+    <div class="row"><a href="#">Crear cuenta</a><a href="#">Olvidé mi contraseña</a></div>
+  </form>
+</main>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>document.getElementById('f').addEventListener('submit',e=>e.preventDefault())</script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+/*! Element UI v2.0.0 · grid, cubes, waves · MIT · ELEMENT SYSTEMS */
+
+/* ── Grilla viva (components/grid/element-grid.css) ── */
+/* ELEMENT UI / Grilla viva. Colores por variables CSS: --eui-grid-cell debe coincidir con el fondo de tu página. */
+/* Las variables usan :where() (especificidad 0): cualquier clase tuya las sobrescribe. */
+:where(.eui-grid){
+  --eui-grid-line:rgba(23,24,26,.07);
+  --eui-grid-cell:#fbfafd;
+  --eui-grid-accent:#dd6330;
+  --eui-grid-label:#15152a;
+}
+.eui-grid{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:var(--eui-grid-cell);
+}
+.eui-grid>.eui-grid-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+.eui-grid>:not(.eui-grid-canvas):not(template){position:relative;z-index:1}
+
+/* Desvanecidos opcionales: data-grid-mask="radial" | "bottom" | "edges" */
+.eui-grid[data-grid-mask="radial"]>.eui-grid-canvas{-webkit-mask-image:radial-gradient(ellipse 80% 78% at 50% 48%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 80% 78% at 50% 48%,#000 55%,transparent 100%)}
+.eui-grid[data-grid-mask="bottom"]>.eui-grid-canvas{-webkit-mask-image:linear-gradient(#000 0,#000 62%,transparent 100%);mask-image:linear-gradient(#000 0,#000 62%,transparent 100%)}
+.eui-grid[data-grid-mask="edges"]>.eui-grid-canvas{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+
+/* Halo para que el texto se lea sobre la retícula */
+.eui-grid-halo{position:relative}
+.eui-grid-halo::before{content:"";position:absolute;inset:-40px -60px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at center,var(--eui-grid-cell) 45%,transparent 72%)}
+
+/* Tema oscuro: data-theme="dark" en <html> o en el componente, o el sistema si no se fuerza "light" */
+:where(:root[data-theme="dark"] .eui-grid:not([data-theme="light"]),.eui-grid[data-theme="dark"]){
+  --eui-grid-line:rgba(236,238,242,.075);--eui-grid-cell:#0f0e14;--eui-grid-accent:#f29a6b;--eui-grid-label:#15152a}
+@media (prefers-color-scheme:dark){
+  :where(:root:not([data-theme="light"]) .eui-grid:not([data-theme="light"])){
+    --eui-grid-line:rgba(236,238,242,.075);--eui-grid-cell:#0f0e14;--eui-grid-accent:#f29a6b;--eui-grid-label:#15152a}
+}
+
+/* ── Cubos isométricos (components/cubes/element-cubes.css) ── */
+/* ELEMENT SYSTEMS — CSS cube geometry, edge drawing and transitions.
+   Each cube preserves front, back, left, right, top and bottom with animated
+   pseudo-elements (first/second/third/fourth). Original source /reference_cubes/cube.css.
+   Changes: CSS scoped to this decorative wall, face colors match the canvas,
+   and wave strength modifies the original raise and border expansion. */
+.co-cube-wall{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:visible;
+ --co-wall-face:#f7f3ef;--co-wall-stroke:#dd6330;
+}
+html[data-co-theme="dark"] .co-cube-wall{--co-wall-face:#15152a;--co-wall-stroke:#f29a6b}
+.co-wall-cube{position:absolute;width:42px;height:42px;pointer-events:none;
+ transform:translate(-50%,-43%);--co-wave:0;--border:var(--co-wall-stroke);
+ --cube-border:var(--co-wall-stroke);--cube-top:var(--co-wall-face);
+ --cube-bottom:var(--co-wall-face);--bg:var(--co-wall-face);
+}
+.co-wall-cube .cubes-wrap{position:absolute;top:0;left:0;width:200px;height:200px;
+ perspective:17000px;perspective-origin:50% -12000px;
+ transform:scale(.20);transform-origin:0 0;pointer-events:none}
+.co-cube-wall .cube{
+    position: relative;
+    width: 200px;
+    transform-style: preserve-3d;
+    transform: rotateY(45deg);
+}.co-cube-wall .cube div{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: 0.3s all ease;
+    z-index: 1;
+}.co-cube-wall .cube div .bx{
+    font-size: 11rem;
+    transition: 0.3s all ease;
+}.co-cube-wall .cube:not(.no-hover).hover div{
+    background: var(--co-wall-face) !important;
+}.co-cube-wall .back{
+    transform: translateZ(-100px) rotateY(180deg) translateY(150px);
+}.co-cube-wall .right{
+    transform: rotateY(-270deg) translateX(100px) translateY(150px);
+    transform-origin: top right;
+}.co-cube-wall .left{
+    transform: rotateY(270deg) translateX(-100px) translateY(150px);
+    transform-origin: center left;
+}.co-cube-wall .top{
+    transform: rotateX(-90deg) translateY(-100px) translateZ(150px);
+    transform-origin: top center;
+    z-index: 5 !important;
+}.co-cube-wall .top .bx,
+.co-cube-wall .top .icon{
+    transform:rotateX(180deg);
+    pointer-events: none;
+}.co-cube-wall .top .icon svg{
+    width: var(--icon-size);
+    height: var(--icon-size);
+    object-fit: contain;
+    stroke: var(--stroke);
+}.co-cube-wall .top .icon img{
+    width: var(--icon-size);
+    height: var(--icon-size);
+    object-fit: contain;
+}.co-cube-wall .cube:not(.no-hover).hover .top{
+    background: var(--cube-top) !important;
+    transform: rotateX(-90deg) translateY(-100px) translateZ(0px);
+}.co-cube-wall .cube.second:not(.no-hover).hover .top{
+    background: var(--cube-top) !important;
+    transform: rotateX(-90deg) translateY(-100px) translateZ(50px);
+}.co-cube-wall .bottom{
+    transform: rotateX(90deg) translateY(100px) translateZ(48px) scale(1);
+    transform-origin: bottom center;
+    z-index: 5 !important;
+    background: var(--bg);
+}.co-cube-wall .no-hover .bottom{
+    background: transparent;
+}.co-cube-wall .cube:not(.no-hover).hover .bottom{
+    transform: rotateX(90deg) translateY(150px) translateZ(100px) scale(1.5);
+    background: var(--cube-bottom) !important;
+}.co-cube-wall .front{
+    transform: translateZ(100px) translateY(150px);
+}.co-cube-wall div.right,
+.co-cube-wall div.left,
+.co-cube-wall div.back,
+.co-cube-wall div.front{
+    height: 0px;
+}.co-cube-wall .cube:not(.no-hover).hover div.right,
+.co-cube-wall .cube:not(.no-hover).hover div.left,
+.co-cube-wall .cube:not(.no-hover).hover div.back,
+.co-cube-wall .cube:not(.no-hover).hover div.front{
+    height: 100px;
+}.co-cube-wall .cube.second:not(.no-hover).hover div.right,
+.co-cube-wall .cube.second:not(.no-hover).hover div.left,
+.co-cube-wall .cube.second:not(.no-hover).hover div.back,
+.co-cube-wall .cube.second:not(.no-hover).hover div.front{
+    height: 50px;
+}.co-cube-wall .cube:not(.no-hover).hover .front{
+    transform: translateZ(100px) translateY(0px);
+}.co-cube-wall .cube:not(.no-hover).hover .back{
+    transform: translateZ(-100px) rotateY(180deg) translateY(0px);
+}.co-cube-wall .cube:not(.no-hover).hover .left{
+    transform: rotateY(270deg) translateX(-100px) translateY(0px);
+}.co-cube-wall .cube:not(.no-hover).hover .right{
+    transform: rotateY(-270deg) translateX(100px) translateY(0px);
+}.co-cube-wall .cube.second:not(.no-hover).hover .front{
+    transform: translateZ(100px) translateY(50px);
+}.co-cube-wall .cube.second:not(.no-hover).hover .back{
+    transform: translateZ(-100px) rotateY(180deg) translateY(50px);
+}.co-cube-wall .cube.second:not(.no-hover).hover .left{
+    transform: rotateY(270deg) translateX(-100px) translateY(50px);
+}.co-cube-wall .cube.second:not(.no-hover).hover .right{
+    transform: rotateY(-270deg) translateX(100px) translateY(50px);
+}.co-cube-wall .cube div span{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}.co-cube-wall .cube .top span::before,
+.co-cube-wall .cube .top span::after,
+.co-cube-wall .cube .front span::before,
+.co-cube-wall .cube .front span::after,
+.co-cube-wall .cube .left span::before,
+.co-cube-wall .cube .left span::after{
+    background: var(--cube-border);
+    opacity: 0.5;
+}.co-cube-wall .cube:not(.no-hover).hover .top span::before,
+.co-cube-wall .cube:not(.no-hover).hover .top span::after,
+.co-cube-wall .cube:not(.no-hover).hover .front span::before,
+.co-cube-wall .cube:not(.no-hover).hover .front span::after,
+.co-cube-wall .cube:not(.no-hover).hover .left span::before,
+.co-cube-wall .cube:not(.no-hover).hover .left span::after{
+    background: var(--cube-border);
+    opacity: 1;
+}.co-cube-wall .cube .top span::before,
+.co-cube-wall .cube .top span::after{
+    transition: 0.7s cubic-bezier(0.8, 0.7, 0.3, 0.2);
+}.co-cube-wall .cube .front span::before,
+.co-cube-wall .cube .front span::after{
+    transition: 0.7s cubic-bezier(0.2, 0.3, 0.7, 0.8);
+}.co-cube-wall .cube .left span::before,
+.co-cube-wall .cube .left span::after{
+    transition: 0.7s cubic-bezier(0.2, 0.3, 0.7, 0.8);
+}.co-cube-wall .top .first::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .first::before{
+    width: 200px;
+    height: 18px;
+    transform: scale(1);
+}.co-cube-wall .top .first::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .first::after{
+    width: 18px;
+    height: 200px;
+    transform: scale(1);
+}.co-cube-wall .top .second::before{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .second::before{
+    width: 200px;
+    height: 18px;
+    transform: scale(1);
+}.co-cube-wall .top .second::after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .second::after{
+    width: 200px;
+    height: 18px;
+    transform: scale(1);
+}.co-cube-wall .top .third::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .third::before{
+    width: 18px;
+    height: 200px;
+    transform: scale(1);
+}.co-cube-wall .top .third::after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .third::after{
+    width: 18px;
+    height: 200px;
+    transform: scale(1);
+}.co-cube-wall .top .fourth::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .fourth::before{
+    width: 200px;
+    height: 18px;
+    transform: scale(1);
+}.co-cube-wall .top .fourth::after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--border);
+    transform: scale(0.5);
+}.co-cube-wall .cube:not(.no-hover).hover .top .fourth::after{
+    width: 18px;
+    height: 200px;
+    transform: scale(1);
+}.co-cube-wall .front .first::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 0px;
+    background: var(--border);
+    transform: translateY(-200%);
+}.co-cube-wall .cube:not(.no-hover).hover .front .first::before{
+    width: 18px;
+    height: 200px;
+    transform: translateY(0px);
+}.co-cube-wall .front .first::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 0px;
+    background: var(--border);
+    transform: translateY(-200%);
+}.co-cube-wall .cube:not(.no-hover).hover .front .first::after{
+    width: 18px;
+    height: 200px;
+    transform: translateY(0px);
+}.co-cube-wall .front .first::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 0px;
+    background: var(--border);
+    transform: translateY(-200%);
+}.co-cube-wall .cube:not(.no-hover).hover .front .first::after{
+    width: 18px;
+    height: 200px;
+    transform: translateY(0px);
+}.co-cube-wall .left .first::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 0px;
+    background: var(--border);
+    transform: translateY(-200%);
+}.co-cube-wall .cube:not(.no-hover).hover .left .first::before{
+    width: 18px;
+    height: 200px;
+    transform: translateY(0px);
+}.co-cube-wall .left .first::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 0px;
+    background: var(--border);
+    transform: translateY(-200%);
+}.co-cube-wall .cube:not(.no-hover).hover .left .first::after{
+    width: 18px;
+    height: 200px;
+    transform: translateY(0px);
+}
+
+
+
+
+
+
+
+/* No shaded faces: all six surfaces take the exact same background color.
+   We deliberately override original .hover div { background: --border }. */
+.co-cube-wall .cube div,
+.co-cube-wall .cube:not(.no-hover).hover div,
+.co-cube-wall .cube .bottom,
+.co-cube-wall .cube:not(.no-hover).hover .bottom,
+.co-cube-wall .cube:not(.no-hover).hover .top{
+ background:var(--co-wall-face)!important;
+}
+.co-cube-wall .cube .top span::before,
+.co-cube-wall .cube .top span::after,
+.co-cube-wall .cube .front span::before,
+.co-cube-wall .cube .front span::after,
+.co-cube-wall .cube .left span::before,
+.co-cube-wall .cube .left span::after{background:var(--co-wall-stroke)!important}
+
+/* Exact source cuboid components, expanded by per-cube wave intensity.
+   Strongest cube retains the reference hover state; neighbors keep a fraction
+   of the height, moving faces and animating outlines progressively. */
+.co-cube-wall .cube:not(.no-hover).hover .top{
+ transform:rotateX(-90deg) translateY(-100px) translateZ(calc(150px * (1 - var(--co-wave))));
+}
+.co-cube-wall .cube:not(.no-hover).hover .front{
+ transform:translateZ(100px) translateY(calc(150px * (1 - var(--co-wave))));
+}
+.co-cube-wall .cube:not(.no-hover).hover .back{
+ transform:translateZ(-100px) rotateY(180deg) translateY(calc(150px * (1 - var(--co-wave))));
+}
+.co-cube-wall .cube:not(.no-hover).hover .left{
+ transform:rotateY(270deg) translateX(-100px) translateY(calc(150px * (1 - var(--co-wave))));
+}
+.co-cube-wall .cube:not(.no-hover).hover div.right{
+ transform:rotateY(-270deg) translateX(100px) translateY(calc(150px * (1 - var(--co-wave))));
+}
+.co-cube-wall .cube:not(.no-hover).hover div.front,
+.co-cube-wall .cube:not(.no-hover).hover div.back,
+.co-cube-wall .cube:not(.no-hover).hover div.left,
+.co-cube-wall .cube:not(.no-hover).hover div.right{
+ height:calc(100px * var(--co-wave));
+}
+.co-cube-wall .cube:not(.no-hover).hover .bottom{
+ transform:rotateX(90deg) translateY(calc(100px + 50px * var(--co-wave)))
+ translateZ(calc(48px + 52px * var(--co-wave))) scale(calc(1 + .5 * var(--co-wave)));
+}
+/* The original border drawing transitions remain active, and the neighbors
+   extend them partially. Geometry is generated from the source's 30px ->
+   200px and 30px -> 18px outline segments. */
+.co-cube-wall .cube:not(.no-hover).hover .top .first::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .first::after,
+.co-cube-wall .cube:not(.no-hover).hover .top .second::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .second::after,
+.co-cube-wall .cube:not(.no-hover).hover .top .third::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .third::after,
+.co-cube-wall .cube:not(.no-hover).hover .top .fourth::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .fourth::after{
+ transform:scale(calc(.5 + .5 * var(--co-line,var(--co-wave))));
+}
+.co-cube-wall .cube:not(.no-hover).hover .top .first::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .second::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .fourth::before{
+ width:calc(30px + 170px * var(--co-line,var(--co-wave)));height:calc(30px - 12px * var(--co-line,var(--co-wave)));
+}
+.co-cube-wall .cube:not(.no-hover).hover .top .first::after,
+.co-cube-wall .cube:not(.no-hover).hover .top .second::after,
+.co-cube-wall .cube:not(.no-hover).hover .top .third::before,
+.co-cube-wall .cube:not(.no-hover).hover .top .third::after,
+.co-cube-wall .cube:not(.no-hover).hover .top .fourth::after{
+ width:calc(30px - 12px * var(--co-line,var(--co-wave)));height:calc(30px + 170px * var(--co-line,var(--co-wave)));
+}
+.co-cube-wall .cube:not(.no-hover).hover .front .first::before,
+.co-cube-wall .cube:not(.no-hover).hover .front .first::after,
+.co-cube-wall .cube:not(.no-hover).hover .left .first::before,
+.co-cube-wall .cube:not(.no-hover).hover .left .first::after{
+ height:calc(200px * var(--co-wave));
+}
+/* The original .top/.bottom/.left/.front transitions are left intact. */
+@media(prefers-reduced-motion:reduce){
+ .co-cube-wall .cube div,.co-cube-wall .cube span::before,.co-cube-wall .cube span::after{transition:none!important}
+}
+
+/* Exhibit refinements: slightly faster / smoother motion and top-face assets. */
+.co-wall-cube{--icon-size:84px}
+.co-cube-wall .cube div{
+ transition:transform .24s cubic-bezier(.22,1,.36,1),height .24s cubic-bezier(.22,1,.36,1),background-color .24s linear;
+}
+.co-cube-wall .cube .top span::before,
+.co-cube-wall .cube .top span::after,
+.co-cube-wall .cube .front span::before,
+.co-cube-wall .cube .front span::after,
+.co-cube-wall .cube .left span::before,
+.co-cube-wall .cube .left span::after{
+ transition:.56s cubic-bezier(.22,.61,.36,1);
+}
+.co-cube-wall .top .icon,
+.co-cube-wall .top .image{
+ position:absolute;
+ inset:0;
+ display:grid;
+ place-items:center;
+ pointer-events:none;
+ z-index:2;
+}
+.co-cube-wall .top .icon img,
+.co-cube-wall .top .image img{
+ width:var(--icon-size);
+ height:var(--icon-size);
+ aspect-ratio:1/1;
+ object-fit:contain;
+ filter:drop-shadow(0 2px 6px rgba(0,0,0,.16));
+}
+.co-cube-wall .cube.has-top-asset .top{overflow:visible}
+.co-cube-wall .cube.has-top-asset .top .icon,
+.co-cube-wall .cube.has-top-asset .top .image{
+ opacity:calc(.22 + .72 * var(--co-wave));
+ transform:rotateX(180deg) scale(calc(.78 + .22 * var(--co-wave)));
+ transform-origin:center center;
+ transition:opacity .24s linear, transform .24s cubic-bezier(.22,1,.36,1);
+}
+.co-cube-wall .cube.has-top-asset .top .icon img,
+.co-cube-wall .cube.has-top-asset .top .image img{
+ border-radius:14px;
+}
+
+/* Optional icon/image visibility. The default is reveal: when the cube is
+   collapsed artwork is fully invisible. No image is drawn before activation. */
+.co-cube-wall[data-icon-visibility="reveal"] .cube.has-top-asset .top .icon,
+.co-cube-wall[data-icon-visibility="reveal"] .cube.has-top-asset .top .image {
+  opacity: 0;
+  visibility: hidden;
+}
+.co-cube-wall[data-icon-visibility="reveal"] .cube.has-top-asset.hover .top .icon,
+.co-cube-wall[data-icon-visibility="reveal"] .cube.has-top-asset.hover .top .image {
+  visibility: visible;
+  opacity: clamp(0, calc((var(--co-wave) - .3) * 1.8), 1);
+}
+.co-cube-wall[data-icon-visibility="always"] .cube.has-top-asset .top .icon,
+.co-cube-wall[data-icon-visibility="always"] .cube.has-top-asset .top .image {
+  visibility: visible;
+  opacity: .88;
+}
+
+/* Fotografías: cubren la cara superior entera y se revelan al abrirse el cubo */
+.co-cube-wall .top .image.photo{inset:6px}
+.co-cube-wall[data-icon-visibility="reveal"] .cube.has-top-asset.hover .top .image.photo{opacity:clamp(0,calc((var(--co-wave) - .4) * 3.4),1)}
+.co-cube-wall .cube.has-top-asset .top .image.photo img{width:100%;height:100%;object-fit:cover;border-radius:10px;filter:none;box-shadow:0 0 0 2px var(--co-wall-stroke)}
+
+/* ELEMENT UI public animation timing overrides; original drawing geometry unchanged. */
+.co-cube-wall .cube div{
+ transition:transform var(--eui-face-time,240ms) cubic-bezier(.22,1,.36,1),height var(--eui-face-time,240ms) cubic-bezier(.22,1,.36,1),background-color var(--eui-face-time,240ms) linear;
+}
+.co-cube-wall .cube .top span::before,.co-cube-wall .cube .top span::after,
+.co-cube-wall .cube .front span::before,.co-cube-wall .cube .front span::after,
+.co-cube-wall .cube .left span::before,.co-cube-wall .cube .left span::after{
+ transition:all var(--eui-edge-time,560ms) cubic-bezier(.22,.61,.36,1);
+}
+
+/* Aristas verticales: caen desde la tapa hasta la base, como en la versión original.
+   Empiezan un instante después que la tapa y avanzan con la curva lineal del original. */
+.co-cube-wall .cube .front span::before,.co-cube-wall .cube .front span::after,
+.co-cube-wall .cube .left span::before,.co-cube-wall .cube .left span::after{
+ transition:height var(--eui-drop-time,700ms) cubic-bezier(.2,.3,.7,.8) var(--eui-drop-delay,40ms),
+  transform var(--eui-drop-time,700ms) cubic-bezier(.2,.3,.7,.8) var(--eui-drop-delay,40ms),
+  background-color .3s linear;
+}
+.co-cube-wall .cube:not(.hover) .front span::before,.co-cube-wall .cube:not(.hover) .front span::after,
+.co-cube-wall .cube:not(.hover) .left span::before,.co-cube-wall .cube:not(.hover) .left span::after{
+ transition-duration:calc(var(--eui-drop-time,700ms) * .3);transition-delay:0ms;transition-timing-function:cubic-bezier(.4,0,1,1);
+}
+
+/* Piezas de marca (<template data-eui-items>): la tapa abierta toma su color y el logotipo se centra */
+.co-cube-wall .cube.has-brand:not(.no-hover).hover .top{
+ background:var(--eui-top,var(--co-wall-face))!important;
+ background:color-mix(in srgb,var(--eui-top,var(--co-wall-face)) calc(clamp(0,(var(--co-wave) - .3) * 2.2,1) * 100%),var(--co-wall-face))!important}
+/* El contenedor del logotipo o la foto nunca tapa la tapa con el color de las caras */
+.co-cube-wall .cube .top div.image,.co-cube-wall .cube .top div.icon,
+.co-cube-wall .cube:not(.no-hover).hover .top div.image,.co-cube-wall .cube:not(.no-hover).hover .top div.icon{background:transparent!important}
+.co-cube-wall .top .image.logo{inset:0}
+.co-cube-wall .cube.has-top-asset .top .image.logo img{width:104px;height:104px;object-fit:contain;filter:none;border-radius:0}
+.co-cube-wall[data-icon-visibility="reveal"] .cube.has-top-asset.hover .top .image.logo{opacity:clamp(0,calc((var(--co-wave) - .35) * 3),1)}
+/* Lista de enlaces para teclado y lectores de pantalla: oculta hasta recibir el foco */
+.eui-cubes-links{position:absolute;left:12px;bottom:12px;z-index:3;margin:0;padding:0;list-style:none}
+.eui-cubes-links li{display:contents}
+.eui-cubes-links a{position:absolute;left:0;bottom:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;
+ font:500 13px/1 system-ui,sans-serif;color:#15152a;background:#fff;text-decoration:none;border-radius:999px}
+.eui-cubes-links a:focus-visible{width:auto;height:auto;clip:auto;padding:8px 13px;outline:2px solid var(--co-wall-stroke);outline-offset:2px}
+
+/* Blindaje: las caras se llaman .top, .back, .left… Si la página usa esas clases para otra cosa
+   (una barra .top, un enlace .back), sus estilos no deben colarse en los cubos. */
+.co-cube-wall .cube>div{inset:auto;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;outline:0;
+ translate:none;scale:none;rotate:none;min-width:0;min-height:0;max-width:none;max-height:none;
+ backdrop-filter:none;-webkit-backdrop-filter:none;opacity:1;visibility:visible;color:inherit;font:inherit}
+
+/* Con data-eui-rest los bordes de la tapa se dibujan completos aunque el cubo esté a medio abrir */
+.co-cube-wall.has-rest{--co-line:1}
+/* La base crece hasta 1.5× al abrirse: con el color de las caras tapaba la esquina de los cubos vecinos.
+   Es invisible (queda debajo del cubo), así que se pinta transparente. */
+.co-cube-wall .cube .bottom,.co-cube-wall .cube:not(.no-hover).hover .bottom{background:transparent!important}
+
+/* ── Olas (components/waves/element-waves.css) ── */
+/* ELEMENT UI / Olas. Agua animada que llena un espacio hasta un nivel, con oleaje, marea y espuma.
+   Colores por variables CSS (especificidad 0 con :where()): cualquier clase tuya las sobrescribe. */
+:where(.eui-waves){
+  --eui-waves-bg:#f7f3ef;               /* el fondo sobre el agua (puede ser transparent) */
+  --eui-waves-water:#dd6330;            /* el agua */
+  --eui-waves-foam:color-mix(in srgb,var(--eui-waves-water) 55%,transparent);  /* las dos olas de atrás */
+  --eui-waves-foam-2:color-mix(in srgb,var(--eui-waves-water) 30%,transparent);
+}
+.eui-waves{position:relative;isolation:isolate;overflow:hidden;background:var(--eui-waves-bg)}
+.eui-waves>:not(.eui-waves-sea):not(template){position:relative;z-index:1}
+.eui-waves-sea{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.eui-waves[data-waves-direction="down"]>.eui-waves-sea{transform:scaleY(-1)}
+/* El agua sube hasta --eui-waves-level (0–100). La marea la mece arriba y abajo. */
+.eui-waves-tide{position:absolute;inset:0;animation:eui-waves-tide var(--eui-waves-tide-time,6s) ease-in-out infinite alternate;animation-play-state:var(--eui-waves-play,running)}
+.eui-waves:not([data-waves-tide="true"]) .eui-waves-tide{animation:none}
+.eui-waves-water{position:absolute;left:0;right:0;top:0;height:100%;background:var(--eui-waves-water);
+  /* El nivel marca la línea del agua; la cresta sobresale por encima. Entre 0 y 4 el término extra
+     la esconde del todo, para que en 0 no se vea nada. */
+  transform:translateY(calc((100 - var(--eui-waves-level,50)) * 1% + var(--eui-waves-size,2400px) * .04 * max(0, 1 - var(--eui-waves-level,50) / 4)));transition:transform var(--eui-waves-rise,1.2s) var(--eui-waves-ease,cubic-bezier(.22,1,.36,1));will-change:transform}
+@keyframes eui-waves-tide{from{translate:0 0}to{translate:0 var(--eui-waves-tide,6%)}}
+/* Tres bloques redondeados enormes que giran a distinto ritmo: su borde superior dibuja el oleaje.
+   El primero es el agua; los otros dos, más altos y translúcidos, son las olas de atrás.
+   Nada pinta el aire, así que el fondo puede ser transparente (útil para transiciones). */
+.eui-waves-water i{position:absolute;left:50%;top:0;width:var(--eui-waves-size,2400px);height:var(--eui-waves-size,2400px);
+  translate:-50% 0;animation:eui-waves-spin var(--t,12s) linear infinite;animation-play-state:var(--eui-waves-play,running)}
+.eui-waves-water i:nth-child(1){--t:calc(var(--eui-waves-period,12s) * .55);border-radius:47%;background:var(--eui-waves-water);z-index:3}
+.eui-waves-water i:nth-child(2){--t:calc(var(--eui-waves-period,12s) * 1);border-radius:46%;background:var(--eui-waves-foam);z-index:2;translate:-50% calc(var(--eui-waves-size,2400px) * -.004)}
+.eui-waves-water i:nth-child(3){--t:calc(var(--eui-waves-period,12s) * 1.5);border-radius:46.5%;background:var(--eui-waves-foam-2);z-index:1;translate:-50% calc(var(--eui-waves-size,2400px) * -.008)}
+@keyframes eui-waves-spin{to{rotate:360deg}}
+/* Tema oscuro: data-theme="dark" en <html> o en el componente, o el sistema si no se fuerza "light" */
+:where(:root[data-theme="dark"] .eui-waves:not([data-theme="light"]),.eui-waves[data-theme="dark"]){
+  --eui-waves-bg:#15152a;--eui-waves-water:#f29a6b}
+@media (prefers-color-scheme:dark){
+  :where(:root:not([data-theme="light"]) .eui-waves:not([data-theme="light"])){
+    --eui-waves-bg:#15152a;--eui-waves-water:#f29a6b}
+}
+@media (prefers-reduced-motion:reduce){.eui-waves-water i,.eui-waves-tide{animation:none}.eui-waves-water{transition:none}}

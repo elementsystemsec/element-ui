@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grilla viva · demo</title>
+<!-- Demo aislada: solo carga los archivos del componente. -->
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="element-grid.css">
+<style>
+  html,body{margin:0;height:100%}
+  body{font-family:system-ui,sans-serif}
+  .stage{height:100%;min-height:320px;display:grid;place-items:center}
+  .stage h1{margin:0;font-size:clamp(22px,5vw,44px);font-weight:600;letter-spacing:-.03em;color:var(--eui-grid-accent);text-align:center}
+</style>
+<script>addEventListener('message',e=>{if(e.data&&e.data.euiTheme)document.documentElement.dataset.theme=e.data.euiTheme})</script>
+<script defer src="element-grid.js"></script>
+</head>
+<body>
+<section class="eui-grid stage" data-element-grid data-grid-cell="72" data-grid-interval="2200" data-grid-delay="400" data-grid-mask="radial" data-grid-interactive="true">
+  <template data-grid-items>
+    <img src="../../assets/photos/arquitectura.webp" alt="">
+    <span>¿Cuándo vence la tarea 2?</span>
+    <img src="../../assets/photos/orbita.webp" alt="">
+    <span>Resúmeme la clase de ayer</span>
+    <img src="../../assets/photos/dalia.webp" alt="">
+    <span>Hazme 5 preguntas de repaso</span>
+    <img src="../../assets/photos/canon.webp" alt="">
+  </template>
+  <h1 class="eui-grid-halo" data-grid-avoid>Grilla viva</h1>
+</section>
+</body>
+</html>

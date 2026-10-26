@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__NAME__ · demo</title>
+<!-- Demo aislada: solo carga los archivos del componente. También es la vista previa de la galería. -->
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="element-__ID__.css">
+<style>
+  html,body{margin:0;height:100%;font-family:system-ui,sans-serif;background:#f7f7fb;color:#15152a}
+  :root[data-theme="dark"] body{background:#0f0e14;color:#ececf4}
+  body{display:grid;place-items:center;padding:24px;box-sizing:border-box}
+</style>
+<script>addEventListener('message',e=>{if(e.data&&e.data.euiTheme)document.documentElement.dataset.theme=e.data.euiTheme})</script>
+<script defer src="element-__ID__.js"></script>
+</head>
+<body>
+<div class="eui-__ID__" data-element-__ID__>
+  <p>__NAME__: pasa el cursor por encima.</p>
+</div>
+</body>
+</html>

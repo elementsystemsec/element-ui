@@ -1,0 +1,88 @@
+{
+  "$comment": "Registro de componentes. `npm run new` añade entradas; `npm run build` genera dist/ a partir de aquí (y el registro del catálogo, si existe).",
+  "components": [
+    {
+      "id": "grid",
+      "name": "Grilla viva",
+      "description": "Retícula en canvas: una celda crece, sus vecinas la acompañan y dentro aparece una imagen o un texto, sin tapar tu contenido.",
+      "categories": [
+        "Fondos",
+        "Interacción"
+      ],
+      "tags": [
+        "hero",
+        "canvas",
+        "portadas",
+        "fondo animado",
+        "grid",
+        "retícula"
+      ],
+      "since": "2.0.0",
+      "status": "stable",
+      "files": [
+        "element-grid.css",
+        "element-grid.js"
+      ],
+      "api": "ElementUI.Grid",
+      "selector": "[data-element-grid]",
+      "symbol": "Gr"
+    },
+    {
+      "id": "cubes",
+      "name": "Cubos isométricos",
+      "description": "Retícula de cubos 3D cuyas caras y bordes se despliegan con el cursor. También como fondo ambiente o indicador de carga.",
+      "categories": [
+        "Interacción",
+        "Fondos",
+        "Carga"
+      ],
+      "tags": [
+        "3d",
+        "isométrico",
+        "loader",
+        "footer",
+        "login",
+        "cubos"
+      ],
+      "since": "1.0.0",
+      "status": "stable",
+      "files": [
+        "element-cubes.css",
+        "element-cubes.js"
+      ],
+      "assets": "assets",
+      "api": "ElementUI.Cubes",
+      "selector": "[data-element-cubes]",
+      "symbol": "Cu"
+    },
+    {
+      "id": "waves",
+      "name": "Olas",
+      "description": "Agua animada que llena un espacio hasta el nivel que elijas, con oleaje en capas y marea. Para fondos, banners, pies de página y cargas con progreso.",
+      "categories": [
+        "Fondos",
+        "Carga"
+      ],
+      "tags": [
+        "olas",
+        "agua",
+        "wave",
+        "fondo animado",
+        "banner",
+        "footer",
+        "login",
+        "progreso",
+        "loader"
+      ],
+      "since": "2.0.0",
+      "status": "stable",
+      "files": [
+        "element-waves.css",
+        "element-waves.js"
+      ],
+      "api": "ElementUI.Waves",
+      "selector": "[data-element-waves]",
+      "symbol": "Ol"
+    }
+  ]
+}

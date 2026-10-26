@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inicio de sesión con olas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/waves/element-waves.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* Pantalla completa: el agua ocupa la mitad baja y la tarjeta flota sobre la cresta.
+     Al enviar, el agua sube y tapa la pantalla como transición hacia el panel. */
+  body{background:#f7f3ef}
+  .scene{min-height:100vh;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding:clamp(18px,3vw,32px) clamp(16px,4vw,48px)}
+  .top{display:flex;justify-content:space-between;align-items:center;font-size:14.5px;color:#55566f}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:500;color:#15152a;letter-spacing:-.01em}
+  .brand i{width:12px;height:19px;background:#dd6330;clip-path:polygon(25.7% 0,74.3% 0,74.3% 13.4%,100% 13.4%,100% 86.6%,74.3% 86.6%,74.3% 100%,25.7% 100%,25.7% 86.6%,0 86.6%,0 13.4%,25.7% 13.4%)}
+  .top a{color:#15152a}
+  .center{display:grid;place-items:center;padding:24px 0}
+  .card{width:min(100%,430px);display:grid;gap:15px;padding:clamp(26px,3.4vw,40px);border-radius:28px;background:rgba(255,255,255,.9);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 40px 90px -40px rgba(21,21,42,.45),0 0 0 1px rgba(21,21,42,.06)}
+  .card h1{margin:0 0 2px;font-size:clamp(36px,4vw,50px);font-weight:200;line-height:.95;letter-spacing:-.05em}
+  .card h1 em{font-style:normal;color:#dd6330}
+  .card p{margin:0 0 6px;color:#55566f}
+  label{display:grid;gap:7px;font-size:14px;color:#55566f}
+  input{height:50px;padding:0 18px;border-radius:999px;border:1px solid rgba(21,21,42,.16);background:#fff;font:inherit;color:#15152a}
+  input:focus{outline:none;border-color:#dd6330;box-shadow:0 0 0 5px rgba(221,99,48,.16)}
+  .submit{height:52px;border:0;border-radius:999px;background:#15152a;color:#fff;font:500 16px/1 'Hanken Grotesk',sans-serif;cursor:pointer;transition:background .25s,color .25s}
+  .submit:hover{background:#dd6330;color:#15152a}
+  .alt{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .alt button{height:46px;border-radius:999px;border:1px solid rgba(21,21,42,.14);background:#fff;font:inherit;font-size:14.5px;color:#15152a;cursor:pointer}
+  .alt button:hover{border-color:#dd6330}
+  .or{display:flex;align-items:center;gap:12px;color:#8586a0;font-size:13px}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:rgba(21,21,42,.12)}
+  small{color:#8586a0;text-align:center}
+  .foot{display:flex;justify-content:flex-end;gap:24px;flex-wrap:wrap;font-size:13px;color:#fbd9c3}
+  /* Escena de llegada (se ve después de la transición) */
+  .welcome{position:fixed;inset:0;z-index:30;display:grid;place-content:center;text-align:center;gap:12px;background:#15152a;color:#f4f3f6;opacity:0;visibility:hidden}
+  .welcome.on{opacity:1;visibility:visible}
+  .welcome h2{margin:0;font-weight:200;font-size:clamp(44px,7vw,96px);letter-spacing:-.05em;line-height:.95}
+  .welcome h2 em{font-style:normal;color:#f29a6b}
+  .welcome p{margin:0;color:#fbd9c3}
+  .welcome button{justify-self:center;margin-top:14px;height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(244,243,246,.3);background:none;color:#f4f3f6;font:inherit;cursor:pointer}
+  .curtain{position:fixed;inset:0;z-index:40;pointer-events:none;background:transparent}
+</style>
+<script defer src="../components/waves/element-waves.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="login" data-variant="olas">
+<main class="scene eui-waves" data-element-waves data-waves-level="34" data-waves-tide="true" data-waves-curve="soft">
+  <div class="top"><span class="brand"><i></i>Estudio Norte</span><span>¿Nuevo aquí? <a href="#">Crea una cuenta</a></span></div>
+  <div class="center">
+    <form class="card" id="f">
+      <h1>Hola <em>otra vez.</em></h1>
+      <p>Entra para seguir donde lo dejaste.</p>
+      <div class="alt"><button type="button">Google</button><button type="button">GitHub</button></div>
+      <div class="or">o con tu correo</div>
+      <label>Correo electrónico<input type="email" placeholder="nombre@correo.com" autocomplete="email" required></label>
+      <label>Contraseña<input type="password" placeholder="••••••••" autocomplete="current-password" required minlength="4"></label>
+      <button class="submit" type="submit">Iniciar sesión</button>
+      <small>Ejemplo: no se envía ningún dato.</small>
+    </form>
+  </div>
+  <div class="foot"><span>© 2026 Estudio Norte</span><span>Privacidad · Términos</span></div>
+</main>
+
+<div class="welcome" id="welcome" aria-live="polite">
+  <h2>Ya estás <em>dentro.</em></h2>
+  <p>El agua tapó la pantalla y la escena cambió.</p>
+  <button type="button" id="again">Volver al inicio</button>
+</div>
+<!-- Telón: unas olas propias a pantalla completa, solo para la transición -->
+<div class="curtain eui-waves" id="curtain" data-element-waves data-waves-level="-25" data-waves-curve="medium"
+     style="--eui-waves-bg:transparent;--eui-waves-water:#dd6330;--eui-waves-foam:rgba(242,154,107,.75);--eui-waves-foam-2:rgba(251,217,195,.6)"></div>
+
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const curtain = ElementUI.Waves.get(document.getElementById('curtain'));
+  const welcome = document.getElementById('welcome');
+  const go = async show => {
+    await curtain.cover(1000);              // el agua tapa todo
+    welcome.classList.toggle('on', show);   // se cambia la escena detrás
+    await curtain.uncover({ exit: 'up' });  // y el agua sigue subiendo hasta salir
+  };
+  document.getElementById('f').addEventListener('submit', e => { e.preventDefault(); go(true); });
+  document.getElementById('again').addEventListener('click', () => go(false));
+});
+</script>
+</body>
+</html>

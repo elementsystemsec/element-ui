@@ -1,0 +1,37 @@
+/* ELEMENT UI / Olas. Agua animada que llena un espacio hasta un nivel, con oleaje, marea y espuma.
+   Colores por variables CSS (especificidad 0 con :where()): cualquier clase tuya las sobrescribe. */
+:where(.eui-waves){
+  --eui-waves-bg:#f7f3ef;               /* el fondo sobre el agua (puede ser transparent) */
+  --eui-waves-water:#dd6330;            /* el agua */
+  --eui-waves-foam:color-mix(in srgb,var(--eui-waves-water) 55%,transparent);  /* las dos olas de atrás */
+  --eui-waves-foam-2:color-mix(in srgb,var(--eui-waves-water) 30%,transparent);
+}
+.eui-waves{position:relative;isolation:isolate;overflow:hidden;background:var(--eui-waves-bg)}
+.eui-waves>:not(.eui-waves-sea):not(template){position:relative;z-index:1}
+.eui-waves-sea{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.eui-waves[data-waves-direction="down"]>.eui-waves-sea{transform:scaleY(-1)}
+/* El agua sube hasta --eui-waves-level (0–100). La marea la mece arriba y abajo. */
+.eui-waves-tide{position:absolute;inset:0;animation:eui-waves-tide var(--eui-waves-tide-time,6s) ease-in-out infinite alternate;animation-play-state:var(--eui-waves-play,running)}
+.eui-waves:not([data-waves-tide="true"]) .eui-waves-tide{animation:none}
+.eui-waves-water{position:absolute;left:0;right:0;top:0;height:100%;background:var(--eui-waves-water);
+  /* El nivel marca la línea del agua; la cresta sobresale por encima. Entre 0 y 4 el término extra
+     la esconde del todo, para que en 0 no se vea nada. */
+  transform:translateY(calc((100 - var(--eui-waves-level,50)) * 1% + var(--eui-waves-size,2400px) * .04 * max(0, 1 - var(--eui-waves-level,50) / 4)));transition:transform var(--eui-waves-rise,1.2s) var(--eui-waves-ease,cubic-bezier(.22,1,.36,1));will-change:transform}
+@keyframes eui-waves-tide{from{translate:0 0}to{translate:0 var(--eui-waves-tide,6%)}}
+/* Tres bloques redondeados enormes que giran a distinto ritmo: su borde superior dibuja el oleaje.
+   El primero es el agua; los otros dos, más altos y translúcidos, son las olas de atrás.
+   Nada pinta el aire, así que el fondo puede ser transparente (útil para transiciones). */
+.eui-waves-water i{position:absolute;left:50%;top:0;width:var(--eui-waves-size,2400px);height:var(--eui-waves-size,2400px);
+  translate:-50% 0;animation:eui-waves-spin var(--t,12s) linear infinite;animation-play-state:var(--eui-waves-play,running)}
+.eui-waves-water i:nth-child(1){--t:calc(var(--eui-waves-period,12s) * .55);border-radius:47%;background:var(--eui-waves-water);z-index:3}
+.eui-waves-water i:nth-child(2){--t:calc(var(--eui-waves-period,12s) * 1);border-radius:46%;background:var(--eui-waves-foam);z-index:2;translate:-50% calc(var(--eui-waves-size,2400px) * -.004)}
+.eui-waves-water i:nth-child(3){--t:calc(var(--eui-waves-period,12s) * 1.5);border-radius:46.5%;background:var(--eui-waves-foam-2);z-index:1;translate:-50% calc(var(--eui-waves-size,2400px) * -.008)}
+@keyframes eui-waves-spin{to{rotate:360deg}}
+/* Tema oscuro: data-theme="dark" en <html> o en el componente, o el sistema si no se fuerza "light" */
+:where(:root[data-theme="dark"] .eui-waves:not([data-theme="light"]),.eui-waves[data-theme="dark"]){
+  --eui-waves-bg:#15152a;--eui-waves-water:#f29a6b}
+@media (prefers-color-scheme:dark){
+  :where(:root:not([data-theme="light"]) .eui-waves:not([data-theme="light"])){
+    --eui-waves-bg:#15152a;--eui-waves-water:#f29a6b}
+}
+@media (prefers-reduced-motion:reduce){.eui-waves-water i,.eui-waves-tide{animation:none}.eui-waves-water{transition:none}}

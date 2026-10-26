@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inicio de sesión · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/cubes/element-cubes.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  body{background:#f4f3f6}
+  .login{min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:16px}
+  /* Formulario */
+  .form-side{display:grid;grid-template-rows:auto 1fr auto;padding:clamp(20px,3vw,40px) clamp(20px,5vw,72px)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:500;letter-spacing:-.01em}
+  .brand i{width:12px;height:19px;background:#dd6330;clip-path:polygon(25.7% 0,74.3% 0,74.3% 13.4%,100% 13.4%,100% 86.6%,74.3% 86.6%,74.3% 100%,25.7% 100%,25.7% 86.6%,0 86.6%,0 13.4%,25.7% 13.4%)}
+  .form{align-self:center;width:min(100%,400px);display:grid;gap:16px}
+  .form h1{margin:0;font-size:clamp(40px,4.6vw,60px);font-weight:200;line-height:.95;letter-spacing:-.05em}
+  .form h1 em{font-style:normal;color:#dd6330}
+  .form p{margin:0 0 8px;color:#55566f;font-size:16px}
+  .form label{display:grid;gap:7px;font-size:14px;color:#55566f}
+  .form input{height:50px;padding:0 18px;border-radius:999px;border:1px solid rgba(21,21,42,.16);background:#fff;font:inherit;color:#15152a}
+  .form input:focus{outline:none;border-color:#dd6330;box-shadow:0 0 0 5px rgba(221,99,48,.16)}
+  .row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#55566f}
+  .row a{color:#15152a}
+  .row input{height:auto;accent-color:#dd6330}
+  .row label{display:flex;gap:8px;align-items:center}
+  .submit{height:52px;border:0;border-radius:999px;background:#15152a;color:#fff;font:500 16px/1 inherit;font-family:inherit;cursor:pointer;transition:background .25s}
+  .submit:hover{background:#dd6330;color:#15152a}
+  .form small{color:#8586a0;text-align:center}
+  .legal{font-size:13px;color:#8586a0}
+  /* Arte: pocos cubos, bien centrados, con título */
+  .art{position:relative;overflow:hidden;border-radius:28px;background:#15152a;color:#f4f3f6;min-height:520px;display:grid}
+  .art .exhibit{position:absolute;inset:0}
+  .art .exhibit-scene{position:absolute;inset:4% 0 34%}
+  .art-copy{position:relative;z-index:2;align-self:end;padding:clamp(24px,3.4vw,48px);pointer-events:none;
+    background:linear-gradient(0deg,rgba(21,21,42,.95) 30%,rgba(21,21,42,0))}
+  .art-copy span{display:inline-block;margin-bottom:14px;padding:6px 11px;border-radius:999px;border:1px solid rgba(242,154,107,.5);color:#f29a6b;font:500 11px/1 ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.06em}
+  .art-copy h2{margin:0 0 10px;max-width:14ch;font-size:clamp(30px,3.2vw,46px);font-weight:200;line-height:1;letter-spacing:-.04em}
+  .art-copy p{margin:0;max-width:40ch;color:#fbd9c3;font-size:15.5px}
+  @media (max-width:860px){
+    .login{grid-template-columns:1fr}
+    .art{order:-1;min-height:380px}
+    .form-side{padding:12px 8px 24px;gap:28px}
+  }
+</style>
+<script defer src="../components/cubes/element-cubes.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="login" data-variant="cubos">
+<main class="login">
+  <div class="form-side">
+    <div class="brand"><i></i>Estudio Norte</div>
+    <form class="form" id="f">
+      <h1>Bienvenido <em>de nuevo.</em></h1>
+      <p>Entra con tu correo para seguir con tus proyectos.</p>
+      <label>Correo electrónico<input type="email" placeholder="nombre@correo.com" autocomplete="email" required></label>
+      <label>Contraseña<input type="password" placeholder="••••••••" autocomplete="current-password" required minlength="4"></label>
+      <div class="row"><label><input type="checkbox"> Recordarme</label><a href="#">¿Olvidaste tu contraseña?</a></div>
+      <button class="submit" type="submit">Iniciar sesión</button>
+      <small id="st" role="status">Ejemplo: no se envía ningún dato.</small>
+    </form>
+    <p class="legal">¿Aún no tienes cuenta? <a href="#">Crea una</a></p>
+  </div>
+  <div class="art">
+    <div class="exhibit" data-element-cubes data-eui-mode="interactive" data-eui-rows="4" data-eui-columns="5"
+         data-eui-size="76" data-eui-gap="14" data-eui-face="#15152a" data-eui-border="#f29a6b"
+         data-eui-visuals="images" data-eui-repeat="true" data-eui-assets="../assets/photos/"
+         data-eui-artwork="arquitectura-sq.webp,dalia-sq.webp,oleaje-sq.webp,canon-sq.webp,helecho-sq.webp,cumbre-sq.webp"
+         data-eui-intro="true" tabindex="0">
+      <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+    </div>
+    <div class="art-copy">
+      <h2>Todos tus proyectos, en un solo lugar.</h2>
+      <p>Revisa avances, aprueba entregas y habla con quien construye tu software.</p>
+    </div>
+  </div>
+</main>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('st').textContent='Ejemplo: no se envió ningún dato.'})</script>
+</body>
+</html>

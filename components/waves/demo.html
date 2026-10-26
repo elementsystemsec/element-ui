@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Olas · demo</title>
+<!-- Demo aislada: solo carga los archivos del componente. -->
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="element-waves.css">
+<style>
+  html,body{margin:0;height:100%}
+  body{font-family:system-ui,sans-serif}
+  .stage{height:100%;min-height:320px;display:grid;place-items:center;text-align:center}
+  .stage h1{margin:0;font-size:clamp(28px,6vw,64px);font-weight:300;letter-spacing:-.04em;color:#15152a}
+  .stage p{margin:8px 0 0;color:#5d5e75}
+</style>
+<script>addEventListener('message',e=>{if(e.data&&e.data.euiTheme)document.documentElement.dataset.theme=e.data.euiTheme})</script>
+<script defer src="element-waves.js"></script>
+</head>
+<body>
+<section class="stage" data-element-waves data-waves-level="42" data-waves-tide="true">
+  <div><h1>Olas</h1><p>El agua llena el espacio hasta el nivel que elijas.</p></div>
+</section>
+</body>
+</html>

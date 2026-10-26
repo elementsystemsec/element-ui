@@ -1,0 +1,32 @@
+/* Estilos compartidos de las páginas de ejemplo (no forman parte de los componentes) */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{font:400 16px/1.5 'Hanken Grotesk',system-ui,sans-serif;color:#15152a;background:#f7f7fb;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid #dd6330;outline-offset:3px}
+.ex-back{position:fixed;left:16px;bottom:16px;z-index:50;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:999px;background:#15152a;color:#fff;text-decoration:none;font-size:13.5px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.ex-back:hover{background:#dd6330}
+.ex-nav{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(16px,4vw,48px)}
+.ex-nav b{font-weight:600;letter-spacing:-.02em}
+.ex-nav nav{display:flex;gap:22px;font-size:14.5px;color:#5f6178}
+.ex-nav nav a{text-decoration:none}
+.ex-btn{display:inline-flex;align-items:center;height:46px;padding:0 20px;border-radius:0;background:#15152a;color:#fff;text-decoration:none;font-weight:500;border:0;font-size:15px;cursor:pointer}
+.ex-btn.ghost{background:#fff;color:#15152a;border:1px solid rgba(21,21,42,.16)}
+@media (max-width:640px){.ex-nav nav{display:none}}
+
+/* Barras de desplazamiento con la paleta de la marca */
+*{scrollbar-width:thin;scrollbar-color:rgba(221,99,48,.5) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(221,99,48,.5);border-radius:999px;border:3px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background-color:#dd6330}
+
+/* Selector de variantes (examples/variants.js) */
+.ex-variants{position:fixed;left:50%;bottom:16px;translate:-50% 0;z-index:60;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;
+  background:rgba(21,21,42,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 12px 34px -12px rgba(0,0,0,.5);font:500 13px/1 'Hanken Grotesk',system-ui,sans-serif}
+.ex-variants span{padding:0 10px 0 12px;font:500 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,243,246,.55)}
+.ex-variants a{padding:9px 14px;border-radius:999px;color:#f4f3f6;text-decoration:none;transition:background .2s,color .2s}
+.ex-variants a:hover{background:rgba(244,243,246,.12)}
+.ex-variants a[aria-current="page"]{background:#dd6330;color:#15152a}
+.in-frame .ex-back,.in-frame .ex-variants{display:none!important}
+@media (max-width:560px){.ex-variants span{display:none}.ex-back{bottom:70px}}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hero con portadas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/grid/element-grid.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  .hero{min-height:100vh;display:grid;place-items:center;padding:110px 16px 80px;--eui-grid-cell:#f7f7fb}
+  .hero-txt{display:grid;justify-items:center;text-align:center;gap:22px;padding:30px clamp(16px,4vw,48px)}
+  .hero h1{margin:0;font-size:clamp(46px,8vw,104px);line-height:.92;letter-spacing:-.06em;font-weight:600;max-width:12ch}
+  .hero p{margin:0;max-width:40ch;font-size:clamp(17px,1.6vw,20px);color:#5f6178}
+  .acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+</style>
+<script defer src="../components/grid/element-grid.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="hero" data-variant="grilla">
+<header class="ex-nav"><b>Estudio Norte</b><nav><a href="#">Proyectos</a><a href="#">Servicios</a><a href="#">Contacto</a></nav></header>
+
+<section class="hero eui-grid" data-element-grid data-grid-mask="radial" data-grid-interval="3000">
+  <template data-grid-items>
+    <img src="../assets/photos/arquitectura.webp" alt="">
+    <img src="../assets/photos/orbita.webp" alt="">
+    <img src="../assets/photos/dalia.webp" alt="">
+    <img src="../assets/photos/canon.webp" alt="">
+  </template>
+  <div class="hero-txt eui-grid-halo" data-grid-avoid>
+    <h1>Hacemos software a medida</h1>
+    <p>Plataformas, apps e integraciones para equipos que quieren trabajar mejor. Detrás, algunos de nuestros proyectos.</p>
+    <div class="acts"><a class="ex-btn" href="#">Cuéntanos tu proyecto</a><a class="ex-btn ghost" href="#">Ver proyectos</a></div>
+  </div>
+</section>
+
+<a class="ex-back" href="index.html">← Ejemplos</a>
+</body>
+</html>

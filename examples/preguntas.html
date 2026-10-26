@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hero con preguntas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/grid/element-grid.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  body{background:#101114;color:#ececf4}
+  .ex-nav nav{color:#a0a1b8}
+  /* Colores propios: fondo de la página y acento naranja */
+  .hero{min-height:100vh;display:grid;place-items:center;padding:110px 16px 80px;
+    --eui-grid-cell:#101114;--eui-grid-line:rgba(236,238,242,.07);--eui-grid-accent:#ff7a01;--eui-grid-label:#fff}
+  .hero-txt{display:grid;justify-items:center;text-align:center;gap:20px;padding:30px clamp(16px,4vw,48px)}
+  .hero h1{margin:0;font-size:clamp(46px,8vw,100px);line-height:.92;letter-spacing:-.06em;font-weight:600}
+  .hero p{margin:0;max-width:38ch;font-size:clamp(17px,1.6vw,20px);color:#a0a1b8}
+  .ex-btn{background:#ff7a01;color:#101114}
+</style>
+<script defer src="../components/grid/element-grid.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="hero" data-variant="preguntas">
+<header class="ex-nav"><b>Tutor</b><nav><a href="#">Cómo funciona</a><a href="#">Precios</a></nav></header>
+
+<section class="hero eui-grid" data-element-grid data-grid-mask="radial" data-grid-interval="3200" data-grid-grow="2.2,2" data-grid-interactive="true">
+  <template data-grid-items>
+    <span>¿Cuándo vence la tarea 2?</span>
+    <span>Resúmeme la clase de ayer</span>
+    <span>No entendí el ejercicio 4</span>
+    <span>¿Qué entra en el examen?</span>
+    <span>Explícame la regla de la cadena</span>
+    <span>Hazme 5 preguntas de repaso</span>
+    <span>¿Cómo se calcula mi nota?</span>
+    <span>¿Qué me falta entregar?</span>
+  </template>
+  <div class="hero-txt" data-grid-avoid>
+    <h1>Pregunta lo que sea</h1>
+    <p>Un asistente que responde con lo que ya está en tus cursos. Pasa el cursor por la retícula.</p>
+    <a class="ex-btn" href="#">Probar ahora</a>
+  </div>
+</section>
+
+<a class="ex-back" href="index.html">← Ejemplos</a>
+</body>
+</html>

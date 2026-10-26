@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cubos isométricos · demo</title>
+<!-- Demo aislada: solo carga los archivos del componente. -->
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="element-cubes.css">
+<style>
+  html,body{margin:0;height:100%;background:#f7f3ef}
+  .stage{position:relative;height:100%;min-height:320px}
+  .stage .exhibit,.stage .exhibit-scene{position:absolute;inset:0}
+</style>
+<script defer src="element-cubes.js"></script>
+</head>
+<body>
+<div class="stage">
+  <div class="exhibit" data-element-cubes
+       data-eui-size="58" data-eui-gap="8"
+       data-eui-mode="interactive" data-eui-face="#f7f3ef" data-eui-border="#dd6330"
+       data-eui-visuals="images" data-eui-repeat="true" data-icon-visibility="reveal"
+       data-eui-assets="../../assets/photos/" data-eui-artwork="arquitectura-sq.webp,dalia-sq.webp,orbita-sq.webp,oleaje-sq.webp,canon-sq.webp,petalos-sq.webp,helecho-sq.webp" data-eui-intro="true" tabindex="0">
+    <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+  </div>
+</div>
+</body>
+</html>

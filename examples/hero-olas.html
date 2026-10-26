@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hero con olas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/waves/element-waves.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* El agua sube al cargar y se queda meciéndose bajo el titular; las cifras flotan sobre ella */
+  body{background:#f7f3ef}
+  .hero{min-height:100vh;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;--eui-waves-water:#15152a;--eui-waves-foam:rgba(221,99,48,.9);--eui-waves-foam-2:rgba(242,154,107,.55)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:24px clamp(16px,4vw,48px)}
+  .nav b{font-weight:600;letter-spacing:-.02em}
+  .nav nav{display:flex;gap:24px;font-size:14.5px;color:#55566f}
+  .nav nav a{text-decoration:none}
+  .body{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(24px,5vw,72px);align-items:center;padding:0 clamp(16px,4vw,48px) 0}
+  h1{margin:0;font-weight:200;font-size:clamp(48px,7.6vw,118px);line-height:.9;letter-spacing:-.06em;max-width:11ch}
+  h1 em{font-style:normal;color:#dd6330}
+  .lede{margin:22px 0 28px;max-width:44ch;font-size:clamp(17px,1.5vw,20px);color:#55566f}
+  .acts{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:999px;background:#dd6330;color:#15152a;text-decoration:none;font-weight:500}
+  .btn.ghost{background:transparent;border:1px solid rgba(21,21,42,.2)}
+  .photo{position:relative;justify-self:end;width:min(100%,380px);aspect-ratio:3/4;border-radius:200px 200px 24px 24px;overflow:hidden;box-shadow:0 50px 90px -50px rgba(21,21,42,.6)}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding:clamp(80px,12vh,140px) clamp(16px,4vw,48px) clamp(64px,8vh,96px);color:#f4f3f6}
+  .stats div{border-top:1px solid rgba(244,243,246,.2);padding-top:16px}
+  .stats b{display:block;font-weight:200;font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1}
+  .stats b em{font-style:normal;color:#f29a6b}
+  .stats span{color:#fbd9c3;font-size:14px}
+  @media (max-width:860px){
+    .body{grid-template-columns:1fr}
+    .photo{display:none}
+    .stats{grid-template-columns:1fr 1fr}
+    .nav nav{display:none}
+  }
+</style>
+<script defer src="../components/waves/element-waves.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="hero" data-variant="olas">
+<section class="hero" id="hero" data-element-waves data-waves-level="0" data-waves-rise="2200" data-waves-tide="true" data-waves-tide-amp="3" data-waves-curve="soft" data-waves-speed=".7">
+  <div class="nav"><b>Estudio Norte</b><nav><a href="#">Proyectos</a><a href="#">Servicios</a><a href="#">Contacto</a></nav></div>
+  <div class="body">
+    <div>
+      <h1>Software que <em>fluye</em> con tu equipo.</h1>
+      <p class="lede">Plataformas, apps e integraciones a medida. Sin fricción, sin parches, con un equipo que se queda contigo después de lanzar.</p>
+      <div class="acts"><a class="btn" href="#">Cuéntanos tu proyecto</a><a class="btn ghost" href="#">Ver proyectos</a></div>
+    </div>
+    <figure class="photo" style="margin:0"><img src="../assets/photos/oleaje.webp" alt="Ola rompiendo en el mar"></figure>
+  </div>
+  <div class="stats">
+    <div><b>120<em>+</em></b><span>proyectos entregados</span></div>
+    <div><b>9<em> años</em></b><span>construyendo software</span></div>
+    <div><b>98<em>%</em></b><span>clientes que repiten</span></div>
+    <div><b>24<em>/7</em></b><span>soporte después de lanzar</span></div>
+  </div>
+</section>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+// El agua sube hasta cubrir la franja de cifras
+addEventListener('DOMContentLoaded', () => {
+  const hero = document.getElementById('hero'), w = ElementUI.Waves.get(hero), stats = hero.querySelector('.stats');
+  const fit = () => w.setLevel((stats.offsetHeight - 24) / hero.offsetHeight * 100);
+  requestAnimationFrame(fit); addEventListener('resize', fit);
+});
+</script>
+</body>
+</html>

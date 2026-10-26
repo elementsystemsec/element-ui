@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Perfil con cubos · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/cubes/element-cubes.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* Perfil: el banner vive con una franja de cubos con fotos; avatar con monograma, cifras y publicaciones */
+  body{background:#f7f3ef}
+  .profile{width:min(1120px,100%);margin:0 auto;padding:16px clamp(12px,3vw,24px) 80px}
+  .banner{position:relative;height:clamp(200px,26vw,300px);border-radius:28px;overflow:hidden}
+  .who{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px 28px;align-items:end;padding:0 clamp(12px,3vw,40px);margin-top:-56px;position:relative;z-index:2}
+  .avatar{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:#15152a;color:#f29a6b;font:200 52px/1 'Hanken Grotesk',sans-serif;letter-spacing:-.04em;box-shadow:0 0 0 7px #f7f3ef}
+  .who h1{margin:0;font-weight:300;font-size:clamp(30px,3.4vw,44px);letter-spacing:-.04em;line-height:1}
+  .who p{margin:6px 0 0;color:#55566f}
+  .who .acts{display:flex;gap:8px}
+  .btn{height:44px;padding:0 20px;border-radius:999px;border:0;background:#15152a;color:#fff;font:500 14.5px/1 'Hanken Grotesk',sans-serif;cursor:pointer}
+  .btn.ghost{background:#fff;color:#15152a;border:1px solid rgba(21,21,42,.14)}
+  .btn[aria-pressed="true"]{background:#dd6330;color:#15152a}
+  .stats{display:flex;gap:clamp(20px,4vw,48px);padding:28px clamp(12px,3vw,40px);border-bottom:1px solid rgba(21,21,42,.1)}
+  .stats b{display:block;font-weight:200;font-size:30px;letter-spacing:-.03em;line-height:1}
+  .stats span{font-size:13.5px;color:#55566f}
+  .bio{margin:0 0 0 auto;max-width:44ch;color:#55566f;font-size:15px;align-self:center}
+  .tabs{display:flex;gap:4px;padding:20px clamp(12px,3vw,40px) 18px}
+  .tabs a{padding:9px 16px;border-radius:999px;text-decoration:none;font-size:14.5px;color:#55566f}
+  .tabs a[aria-current]{background:#15152a;color:#fff}
+  .posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .posts figure{margin:0;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#e9e1d9}
+  .posts img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+  .posts figure:hover img{transform:scale(1.05)}
+  .posts figcaption{position:absolute;left:12px;bottom:12px;padding:7px 12px;border-radius:999px;background:rgba(21,21,42,.75);color:#fff;font-size:13px;backdrop-filter:blur(6px)}
+  @media (max-width:760px){
+    .who{grid-template-columns:1fr;justify-items:start;margin-top:-48px}
+    .avatar{width:100px;height:100px;font-size:40px}
+    .stats{flex-wrap:wrap}.bio{margin:0;flex-basis:100%}
+    .posts{grid-template-columns:1fr 1fr}
+  }
+  .banner{background:#efe7e0}
+  .banner .exhibit{position:absolute;inset:0}
+  .banner .exhibit-scene{position:absolute;inset:0 0 14%}
+</style>
+<script defer src="../components/cubes/element-cubes.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="perfil" data-variant="cubos">
+<main class="profile">
+  <div class="banner">
+    <div class="exhibit" id="banner" data-element-cubes data-eui-mode="interactive" data-eui-rows="1" data-eui-columns="6"
+         data-eui-size="96" data-eui-gap="48" data-eui-radius="60" data-eui-face="#f7f3ef" data-eui-border="#d9cfc6"
+         data-eui-idle="false" data-eui-rest="0.45" tabindex="0" aria-label="Trabajos destacados">
+      <template data-eui-items>
+        <span data-edge="#dd6330"><img src="../assets/photos/dalia-sq.webp" alt="Floristería Alba"></span>
+        <span data-edge="#dd6330"><img src="../assets/photos/arquitectura-sq.webp" alt="Estudio Tramo"></span>
+        <span data-edge="#dd6330"><img src="../assets/photos/linterna-sq.webp" alt="Café Farol"></span>
+        <span data-edge="#dd6330"><img src="../assets/photos/canon-sq.webp" alt="Ruta Andina"></span>
+        <span data-edge="#dd6330"><img src="../assets/photos/helecho-sq.webp" alt="Verde Vivo"></span>
+        <span data-edge="#dd6330"><img src="../assets/photos/petalos-sq.webp" alt="Papelería Lirio"></span>
+      </template>
+      <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+    </div>
+  </div>
+  <div class="who">
+    <div class="avatar" aria-hidden="true">LV</div>
+    <div><h1>Lucía Vera</h1><p>Directora de arte · Quito</p></div>
+    <div class="acts"><button class="btn" type="button" id="follow" aria-pressed="false">Seguir</button><button class="btn ghost" type="button">Mensaje</button></div>
+  </div>
+  <div class="stats">
+    <div><b>248</b><span>proyectos</span></div>
+    <div><b>12,4 mil</b><span>seguidores</span></div>
+    <div><b>310</b><span>siguiendo</span></div>
+    <p class="bio">Identidades para marcas que quieren durar. Fotografía, tipografía y mucho papel.</p>
+  </div>
+  <nav class="tabs"><a href="#" aria-current="page">Proyectos</a><a href="#">Colecciones</a><a href="#">Me gusta</a></nav>
+  <section class="posts">
+    <figure><img src="../assets/photos/dalia-v.webp" alt="Dalia en tonos cálidos" loading="lazy"><figcaption>Floristería Alba</figcaption></figure>
+    <figure><img src="../assets/photos/arquitectura-v.webp" alt="Fachada de un edificio" loading="lazy"><figcaption>Estudio Tramo</figcaption></figure>
+    <figure><img src="../assets/photos/linterna-v.webp" alt="Linterna encendida" loading="lazy"><figcaption>Café Farol</figcaption></figure>
+    <figure><img src="../assets/photos/canon-v.webp" alt="Cañón al atardecer" loading="lazy"><figcaption>Ruta Andina</figcaption></figure>
+    <figure><img src="../assets/photos/helecho-sq.webp" alt="Hojas de helecho" loading="lazy"><figcaption>Verde Vivo</figcaption></figure>
+    <figure><img src="../assets/photos/petalos-sq.webp" alt="Pétalos sobre papel" loading="lazy"><figcaption>Papelería Lirio</figcaption></figure>
+  </section>
+</main>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+// Los proyectos se abren uno tras otro, como en el ejemplo de integraciones
+addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('banner'), cubes = ElementUI.Cubes.get(el);
+  let i = 0, hover = false;
+  el.addEventListener('pointerenter', () => hover = true);
+  el.addEventListener('pointerleave', () => hover = false);
+  const narrow = matchMedia('(max-width: 760px)');
+  const layout = () => cubes.update(narrow.matches ? { rows: 2, columns: 3, size: 54, gap: 26 } : { rows: 1, columns: 6, size: 96, gap: 48 });
+  narrow.addEventListener('change', layout); if (narrow.matches) layout();
+  setTimeout(() => cubes.openItem(0), 400);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches)
+    setInterval(() => { if (!hover && !document.hidden) cubes.openItem(i = (i + 1) % 6); }, 2600);
+});
+const f = document.getElementById('follow');
+f.addEventListener('click', () => { const on = f.getAttribute('aria-pressed') !== 'true'; f.setAttribute('aria-pressed', on); f.textContent = on ? 'Siguiendo' : 'Seguir';  });
+</script>
+</body>
+</html>

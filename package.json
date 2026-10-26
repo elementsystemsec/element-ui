@@ -1,0 +1,29 @@
+{
+  "name": "element-ui-systems",
+  "version": "2.0.0",
+  "description": "ELEMENT UI: componentes visuales en HTML, CSS y JavaScript sin frameworks, por ELEMENT SYSTEMS.",
+  "license": "MIT",
+  "author": "ELEMENT SYSTEMS",
+  "private": true,
+  "type": "module",
+  "files": [
+    "components",
+    "dist",
+    "components.json"
+  ],
+  "main": "dist/element-ui.js",
+  "style": "dist/element-ui.css",
+  "scripts": {
+    "new": "node scripts/new-component.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "elementUI": {
+    "repo": "elementsystemsec/element-ui",
+    "$comment": "Repositorio de GitHub: se usa para los enlaces del CDN (jsDelivr) y de GitHub del catálogo."
+  }
+}

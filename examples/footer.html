@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pie de página con redes · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/cubes/element-cubes.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  body{background:#f4f3f6}
+  .page{min-height:42vh;display:grid;place-items:center;color:#8586a0;padding:40px 16px;text-align:center}
+  .foot{background:#15152a;color:#f4f3f6;padding:clamp(48px,7vw,96px) clamp(16px,5vw,72px) 28px;border-radius:32px 32px 0 0}
+  .foot-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px;align-items:center}
+  .foot h2{margin:0;font-size:clamp(44px,6vw,88px);line-height:.92;letter-spacing:-.055em;font-weight:200}
+  .foot h2 em{font-style:normal;color:#f29a6b}
+  .foot p{margin:18px 0 0;max-width:40ch;color:#fbd9c3;font-size:17px}
+  .links{display:grid;margin-top:34px;max-width:380px}
+  .links a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(244,243,246,.16);text-decoration:none;transition:color .2s,padding .3s}
+  .links a:hover{color:#f29a6b;padding-left:6px}
+  .art{position:relative;height:420px}
+  .art .exhibit,.art .exhibit-scene{position:absolute;inset:0}
+  .hint{position:absolute;right:8px;bottom:6px;font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,243,246,.45)}
+  .base{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid rgba(244,243,246,.14);font-size:13.5px;color:rgba(244,243,246,.6)}
+  .base b{font:600 11px/1 Montserrat,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#f4f3f6}
+  @media (max-width:860px){.foot-grid{grid-template-columns:1fr}.art{height:320px}}
+</style>
+<script defer src="../components/cubes/element-cubes.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="pie" data-variant="cubos">
+<div class="page">Contenido de la página</div>
+<footer class="foot">
+  <div class="foot-grid">
+    <div>
+      <h2>¿Construimos lo <em>siguiente?</em></h2>
+      <p>Cuéntanos qué quieres resolver. Te respondemos con una idea clara de cómo lo haríamos.</p>
+      <nav class="links" aria-label="Contacto">
+        <a href="https://wa.me/593996089704" target="_blank" rel="noopener">Escríbenos por WhatsApp <span>↗</span></a>
+        <a href="mailto:contacto@elementsystems.org">contacto@elementsystems.org <span>→</span></a>
+        <a href="https://elementsystems.org/" target="_blank" rel="noopener">elementsystems.org <span>↗</span></a>
+      </nav>
+    </div>
+    <!-- Cada red es un cubo: al abrirse muestra su logotipo sobre una tapa clara y las aristas toman su color -->
+    <div class="art">
+      <div class="exhibit" data-element-cubes data-eui-mode="interactive" data-eui-rows="4" data-eui-columns="6"
+           data-eui-size="72" data-eui-gap="14" data-eui-face="#15152a" data-eui-border="#5b5a73"
+           data-eui-intro="true" tabindex="0" aria-label="Redes sociales">
+        <template data-eui-items>
+          <a href="https://wa.me/593996089704" target="_blank" aria-label="WhatsApp" data-top="#ffffff" data-edge="#25D366"><img src="../assets/icons/whatsapp.svg" alt=""></a>
+          <a href="https://www.instagram.com/elementsystems.ec/" target="_blank" aria-label="Instagram" data-top="#ffffff" data-edge="#FF0069"><img src="../assets/icons/instagram.svg" alt=""></a>
+          <a href="https://www.facebook.com/elementsystems.ec/" target="_blank" aria-label="Facebook" data-top="#ffffff" data-edge="#0866FF"><img src="../assets/icons/facebook.svg" alt=""></a>
+          <a href="https://www.tiktok.com/@elementsystems.ec" target="_blank" aria-label="TikTok" data-top="#ffffff" data-edge="#f4f3f6"><img src="../assets/icons/tiktok.svg" alt=""></a>
+          <a href="https://github.com/elementsystemsec" target="_blank" aria-label="GitHub" data-top="#ffffff" data-edge="#f4f3f6"><img src="../assets/icons/github.svg" alt=""></a>
+          <a href="mailto:contacto@elementsystems.org" aria-label="Correo" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/correo.svg" alt=""></a>
+        </template>
+        <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+      </div>
+      <span class="hint">Pasa el cursor · pulsa un cubo</span>
+    </div>
+  </div>
+  <div class="base"><b>Element Systems</b><span>Software e inteligencia artificial · Ecuador</span></div>
+</footer>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+</body>
+</html>

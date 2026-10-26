@@ -1,0 +1,18 @@
+/* ELEMENT UI / __NAME__. Sin dependencias. */
+.eui-__ID__{
+  --eui-__ID__-background:#e9e8f7;
+  --eui-__ID__-color:#15152a;
+  --eui-__ID__-radius:3px;
+  position:relative;
+  min-width:0;
+  padding:24px;
+  border-radius:var(--eui-__ID__-radius);
+  background:var(--eui-__ID__-background);
+  color:var(--eui-__ID__-color);
+  transition:transform .4s cubic-bezier(.18,.9,.25,1);
+}
+.eui-__ID__.is-active{transform:translateY(-4px)}
+
+@media (prefers-reduced-motion:reduce){
+  .eui-__ID__{transition:none!important;transform:none!important}
+}

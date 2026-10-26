@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Integraciones · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/cubes/element-cubes.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* Pocos cubos, a gran escala: cada uno es una integración. Se abren uno tras otro como un carrusel
+     y el texto de abajo cuenta qué hace la que está abierta. */
+  :root{--bg:#f7f3ef;--ink:#15152a;--muted:#5d5e75;--acc:#dd6330;--line:rgba(21,21,42,.12)}
+  body{background:var(--bg);color:var(--ink)}
+  .wrap{width:min(1180px,100%);margin:0 auto;padding:clamp(40px,7vw,96px) clamp(16px,4vw,40px)}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .tag{display:inline-block;font:500 11px/1 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--acc);padding:7px 11px;border:1px solid rgba(221,99,48,.35);border-radius:999px}
+  h1{margin:0;font-weight:200;font-size:clamp(42px,5.6vw,80px);line-height:.95;letter-spacing:-.05em;max-width:15ch}
+  h1 em{font-style:normal;color:var(--acc)}
+  .head p{margin:0;max-width:36ch;color:var(--muted);font-size:17px}
+  .stage{position:relative;height:clamp(320px,36vw,480px);margin-top:clamp(24px,4vw,48px)}
+  .stage .exhibit,.stage .exhibit-scene{position:absolute;inset:0}
+  .caption{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px 32px;align-items:end;padding-top:24px;border-top:1px solid var(--line)}
+  .count{font:500 13px/1 "JetBrains Mono",monospace;color:var(--muted)}
+  .count b{color:var(--acc);font-weight:500}
+  .name{margin:0;font-weight:200;font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.04em;transition:opacity .25s,transform .45s cubic-bezier(.16,1,.3,1)}
+  .text{margin:8px 0 0;color:var(--muted);font-size:16px;max-width:52ch;min-height:1.6em;transition:opacity .25s}
+  .swap .name,.swap .text{opacity:0;transform:translateY(8px)}
+  .dots{display:flex;gap:8px}
+  .dots button{width:14px;height:22px;border:0;padding:0;background:var(--line);cursor:pointer;transition:background .3s;
+    clip-path:polygon(25.7% 0,74.3% 0,74.3% 13.4%,100% 13.4%,100% 86.6%,74.3% 86.6%,74.3% 100%,25.7% 100%,25.7% 86.6%,0 86.6%,0 13.4%,25.7% 13.4%)}
+  .dots button[aria-pressed="true"]{background:var(--acc)}
+  .note{margin-top:28px;font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.05em;text-transform:uppercase;color:#8586a0}
+  @media (max-width:700px){.caption{grid-template-columns:1fr}.dots{order:-1}}
+</style>
+<script defer src="../components/cubes/element-cubes.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="integraciones" data-variant="cubos">
+<main class="wrap">
+  <div class="head">
+    <div>
+      <h1>Tu asistente se conecta con <em>lo que ya usas.</em></h1>
+    </div>
+    <p>Cinco cubos a gran escala, uno por integración. Se abren solos uno tras otro; pasa el cursor para elegir.</p>
+  </div>
+
+  <div class="stage">
+    <div class="exhibit" id="integraciones" data-element-cubes data-eui-mode="interactive"
+         data-eui-rows="1" data-eui-columns="5" data-eui-size="150" data-eui-gap="90" data-eui-radius="80"
+         data-eui-face="#f7f3ef" data-eui-border="#d9cfc6" data-eui-idle="false" data-eui-rest="0.5" tabindex="0" aria-label="Integraciones">
+      <template data-eui-items>
+        <span data-top="#ffffff" data-edge="#F98012" data-text="Vive dentro de tu campus y responde con lo que ya está en tus cursos."><img src="../assets/icons/moodle.svg" alt="Moodle"></span>
+        <span data-top="#ffffff" data-edge="#25D366" data-text="Avisos y respuestas en el canal donde tus estudiantes ya están."><img src="../assets/icons/whatsapp.svg" alt="WhatsApp"></span>
+        <span data-top="#ffffff" data-edge="#EA4335" data-text="Resúmenes semanales y recordatorios de entregas por correo."><img src="../assets/icons/gmail.svg" alt="Gmail"></span>
+        <span data-top="#ffffff" data-edge="#EA4B71" data-text="Automatiza matrículas, notas y reportes sin escribir código."><img src="../assets/icons/n8n.svg" alt="n8n"></span>
+        <span data-top="#ffffff" data-edge="#FF0000" data-text="Usa tus clases grabadas como fuente para sus respuestas."><img src="../assets/icons/youtube.svg" alt="YouTube"></span>
+      </template>
+      <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+    </div>
+  </div>
+
+  <div class="caption" aria-live="polite">
+    <span class="count"><b id="n">01</b> / 05</span>
+    <div><h2 class="name" id="name">Moodle</h2><p class="text" id="text">Vive dentro de tu campus y responde con lo que ya está en tus cursos.</p></div>
+    <div class="dots" id="dots" role="group" aria-label="Elegir integración"></div>
+  </div>
+  <p class="note">Producto y descripciones de ejemplo · cambia los logotipos por los tuyos</p>
+</main>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('integraciones');
+  const cubes = ElementUI.Cubes.get(el);
+  const tpl = Array.from(el.querySelector('template').content.children);
+  const total = tpl.length, cap = document.querySelector('.caption');
+  const $n = document.getElementById('n'), $name = document.getElementById('name'), $text = document.getElementById('text'), dots = document.getElementById('dots');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  dots.innerHTML = tpl.map((t, i) => `<button type="button" aria-label="${t.querySelector('img').alt}" aria-pressed="${i === 0}"></button>`).join('');
+  let shown = 0, i = 0, timer = 0, hovering = false;
+
+  // En pantallas estrechas, 2 filas de 3 en lugar de 5 en fila
+  const narrow = matchMedia('(max-width: 700px)');
+  const layout = () => cubes.update(narrow.matches ? { rows: 2, columns: 3, size: 110, gap: 64 } : { rows: 1, columns: 5, size: 150, gap: 90 });
+  narrow.addEventListener('change', () => { layout(); cubes.openItem(shown); });
+  if (narrow.matches) layout();
+
+  function show(index) {
+    if (index === shown && $name.textContent) return;
+    shown = index;
+    cap.classList.add('swap');
+    setTimeout(() => {
+      const t = tpl[index];
+      $n.textContent = String(index + 1).padStart(2, '0');
+      $name.textContent = t.querySelector('img').alt;
+      $text.textContent = t.dataset.text;
+      dots.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', String(k === index)));
+      cap.classList.remove('swap');
+    }, 180);
+  }
+  // El texto sigue al cubo abierto, venga del cursor o del carrusel
+  el.addEventListener('eui-cubes:item', e => { if (e.detail) show(e.detail.index); });
+
+  const next = () => { if (!hovering && !document.hidden) { i = (i + 1) % total; cubes.openItem(i); } schedule(); };
+  const schedule = () => { clearTimeout(timer); if (!reduce) timer = setTimeout(next, 2800); };
+  el.addEventListener('pointerenter', () => { hovering = true; });
+  el.addEventListener('pointerleave', () => { hovering = false; i = shown; cubes.openItem(shown); schedule(); });
+  dots.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    i = [...dots.children].indexOf(b); cubes.openItem(i); show(i); schedule();
+  });
+  setTimeout(() => { cubes.openItem(0); schedule(); }, 500);
+});
+</script>
+</body>
+</html>

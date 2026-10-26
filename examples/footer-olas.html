@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pie de página con olas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/waves/element-waves.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* El pie es agua oscura: la cresta separa la página del pie sin una línea recta */
+  body{background:#f7f3ef}
+  .content{padding:clamp(48px,8vw,110px) clamp(16px,4vw,48px) 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:end}
+  .content h2{margin:0;font-weight:200;font-size:clamp(40px,5.4vw,76px);line-height:.95;letter-spacing:-.05em;max-width:13ch}
+  .content h2 em{font-style:normal;color:#dd6330}
+  .content img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:24px;display:block}
+  .foot{--eui-waves-bg:transparent;--eui-waves-water:#15152a;--eui-waves-foam:rgba(221,99,48,.9);--eui-waves-foam-2:rgba(242,154,107,.5);color:#f4f3f6;margin-top:-40px}
+  .foot-in{padding:clamp(150px,18vw,220px) clamp(16px,4vw,48px) 28px;display:grid;gap:56px}
+  .cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px}
+  .cols h3{margin:0 0 14px;font:500 13px/1 'Hanken Grotesk',sans-serif;color:#f29a6b}
+  .cols ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:15px;color:#d8d7e2}
+  .cols a{text-decoration:none}
+  .cols a:hover{color:#f29a6b}
+  .news p{margin:0 0 16px;color:#d8d7e2;max-width:32ch}
+  .news form{display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(244,243,246,.08);max-width:380px}
+  .news input{flex:1;min-width:0;height:44px;padding:0 16px;border:0;background:none;color:#fff;font:inherit}
+  .news input::placeholder{color:#8f8ea8}
+  .news input:focus{outline:none}
+  .news button{height:44px;padding:0 20px;border:0;border-radius:999px;background:#dd6330;color:#15152a;font:500 15px/1 'Hanken Grotesk',sans-serif;cursor:pointer}
+  .mark{font-weight:600;font-size:clamp(64px,15vw,220px);letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(242,154,107,.45);white-space:nowrap;overflow:hidden}
+  .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#8f8ea8;border-top:1px solid rgba(244,243,246,.1);padding-top:20px}
+  @media (max-width:860px){.content{grid-template-columns:1fr}.cols{grid-template-columns:1fr 1fr}.news{grid-column:1/-1}}
+</style>
+<script defer src="../components/waves/element-waves.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="pie" data-variant="olas">
+<section class="content">
+  <h2>¿Construimos <em>lo siguiente</em> juntos?</h2>
+  <img src="../assets/photos/muelle.webp" alt="Muelle de madera entrando al mar">
+</section>
+<footer class="foot" id="foot" data-element-waves data-waves-level="80" data-waves-curve="soft" data-waves-speed=".8">
+  <div class="foot-in">
+    <div class="cols">
+      <div class="news"><h3>Una carta al mes</h3><p>Lo que aprendimos construyendo software, sin relleno.</p>
+        <form onsubmit="event.preventDefault();this.querySelector('button').textContent='¡Listo!'"><input type="email" placeholder="tu@correo.com" aria-label="Correo" required><button>Suscribirme</button></form></div>
+      <div><h3>Estudio</h3><ul><li><a href="#">Proyectos</a></li><li><a href="#">Servicios</a></li><li><a href="#">Equipo</a></li></ul></div>
+      <div><h3>Recursos</h3><ul><li><a href="#">Blog</a></li><li><a href="#">Guías</a></li><li><a href="#">Componentes</a></li></ul></div>
+      <div><h3>Contacto</h3><ul><li><a href="#">hola@estudionorte.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li></ul></div>
+    </div>
+    <div class="mark" aria-hidden="true">Estudio Norte</div>
+    <div class="legal"><span>© 2026 Estudio Norte</span><span>Privacidad · Términos · Cookies</span></div>
+  </div>
+</footer>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+// La línea del agua queda a ~150 px del borde superior del pie, mida lo que mida
+addEventListener('DOMContentLoaded', () => {
+  const f = document.getElementById('foot'), w = ElementUI.Waves.get(f);
+  const fit = () => w.setLevel(100 - 150 / f.offsetHeight * 100);
+  fit(); addEventListener('resize', fit);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carga con olas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/waves/element-waves.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* La casilla de la marca se llena con el progreso. Al llegar a 100, el agua inunda la pantalla
+     y deja ver el contenido. Tres variantes más pequeñas abajo: barra, botón y tarjeta. */
+  body{background:#f7f3ef;color:#15152a}
+  .boot{position:fixed;inset:0;z-index:20;display:grid;place-content:center;justify-items:center;gap:26px;background:#f7f3ef;transition:opacity .5s .2s,visibility 0s .7s}
+  .boot.done{opacity:0;visibility:hidden}
+  .cell{width:140px;height:220px;--eui-waves-bg:#efe7e0;
+    clip-path:polygon(25.7% 0,74.3% 0,74.3% 13.4%,100% 13.4%,100% 86.6%,74.3% 86.6%,74.3% 100%,25.7% 100%,25.7% 86.6%,0 86.6%,0 13.4%,25.7% 13.4%)}
+  .pct{font:200 64px/1 'Hanken Grotesk',sans-serif;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+  .pct small{font-size:.4em;color:#8586a0}
+  .msg{margin:-14px 0 0;font:500 12px/1 'JetBrains Mono',monospace;color:#8586a0;min-height:1em}
+  .flood{position:fixed;inset:0;z-index:25;pointer-events:none;--eui-waves-bg:transparent}
+  /* La página que aparece detrás */
+  .page{min-height:100vh;padding:clamp(40px,6vw,80px) clamp(16px,4vw,48px)}
+  .page h1{margin:0 0 12px;font-weight:200;font-size:clamp(42px,6vw,84px);line-height:.95;letter-spacing:-.05em;max-width:16ch}
+  .page h1 em{font-style:normal;color:#dd6330}
+  .page>p{margin:0 0 40px;color:#55566f;max-width:52ch;font-size:17px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .tile{border-radius:22px;background:#fff;border:1px solid rgba(21,21,42,.08);padding:24px;display:grid;gap:14px;min-height:220px;align-content:space-between}
+  .tile h3{margin:0;font-weight:300;font-size:22px;letter-spacing:-.02em}
+  .tile p{margin:0;color:#55566f;font-size:14.5px}
+  /* Barra */
+  .bar{height:64px;border-radius:999px;--eui-waves-bg:#efe7e0;display:grid;place-items:center;font:500 13px/1 'JetBrains Mono',monospace}
+  /* Botón que se llena mientras envía */
+  .send{height:56px;border:0;border-radius:999px;cursor:pointer;font:500 15px/1 'Hanken Grotesk',sans-serif;color:#15152a;--eui-waves-bg:#15152a;--eui-waves-water:#dd6330;display:grid;place-items:center}
+  .send span{color:#fff;transition:color .3s}
+  .send.busy span{color:#15152a}
+  /* Círculo */
+  .ring{width:120px;height:120px;border-radius:50%;justify-self:center;display:grid;place-items:center;--eui-waves-bg:#15152a;--eui-waves-water:#f29a6b;font:200 28px/1 'Hanken Grotesk',sans-serif;color:#fff;box-shadow:0 0 0 6px #fff,0 0 0 7px rgba(21,21,42,.12)}
+  .again{margin-top:32px;height:44px;padding:0 20px;border-radius:999px;border:1px solid rgba(21,21,42,.16);background:#fff;font:inherit;cursor:pointer}
+</style>
+<script defer src="../components/waves/element-waves.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="carga" data-variant="olas">
+<div class="boot" id="boot" role="status" aria-live="polite">
+  <div class="cell" id="cell" data-element-waves data-waves-level="0" data-waves-rise="700" data-waves-curve="strong" data-waves-speed="1.4"></div>
+  <div class="pct"><span id="pct">0</span><small>%</small></div>
+  <p class="msg" id="msg">Preparando tu espacio</p>
+</div>
+<div class="flood" id="flood" data-element-waves data-waves-level="-25" data-waves-curve="medium"></div>
+
+<main class="page">
+  <h1>Todo listo, <em>Lucía.</em></h1>
+  <p>El agua llenó la casilla, inundó la pantalla y se fue. Abajo, la misma idea en tamaño pequeño.</p>
+  <div class="grid">
+    <div class="tile"><h3>Barra de progreso</h3><div class="bar" id="bar" data-element-waves data-waves-level="0" data-waves-curve="strong" data-waves-rise="500"><span id="barTxt">0 %</span></div><p>Subida de archivos con el agua como progreso.</p></div>
+    <div class="tile"><h3>Botón que envía</h3><button class="send" id="send" type="button" data-element-waves data-waves-level="0" data-waves-curve="strong" data-waves-rise="1600"><span>Enviar propuesta</span></button><p>El botón se llena mientras espera la respuesta.</p></div>
+    <div class="tile"><h3>Indicador redondo</h3><div class="ring" id="ring" data-element-waves data-waves-level="0" data-waves-curve="strong" data-waves-rise="400"><span id="ringTxt">0</span></div><p>Para tarjetas, perfiles o almacenamiento usado.</p></div>
+  </div>
+  <button class="again" id="again" type="button">Ver la carga otra vez</button>
+</main>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const W = el => ElementUI.Waves.get(document.getElementById(el));
+  const cell = W('cell'), flood = W('flood');
+  const $pct = document.getElementById('pct'), $msg = document.getElementById('msg'), boot = document.getElementById('boot');
+  const msgs = [[0, 'Preparando tu espacio'], [30, 'Trayendo tus proyectos'], [65, 'Ordenando entregas'], [92, 'Casi listo']];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  async function run() {
+    boot.classList.remove('done'); cell.setLevel(0);
+    let p = 0;
+    while (p < 100) {
+      await new Promise(r => setTimeout(r, reduce ? 20 : 180 + Math.random() * 260));
+      p = Math.min(100, p + Math.round(4 + Math.random() * 12));
+      cell.setLevel(p);
+      $pct.textContent = p;
+      $msg.textContent = msgs.filter(m => p >= m[0]).pop()[1];
+    }
+    await new Promise(r => setTimeout(r, 400));
+    await flood.cover(900);      // el agua inunda la pantalla
+    boot.classList.add('done');
+    await flood.uncover({ exit: 'up' });
+    demos();
+  }
+  // Las tres versiones pequeñas
+  function demos() {
+    const bar = W('bar'), ring = W('ring'), $b = document.getElementById('barTxt'), $r = document.getElementById('ringTxt');
+    let v = 0; bar.setLevel(0); ring.setLevel(0);
+    const t = setInterval(() => {
+      v = Math.min(100, v + 7); bar.setLevel(v); ring.setLevel(v * .78 + 6);
+      $b.textContent = v + ' %'; $r.textContent = Math.round(v * .78);
+      if (v === 100) clearInterval(t);
+    }, 260);
+  }
+  const send = document.getElementById('send'), s = W('send');
+  send.addEventListener('click', () => {
+    if (send.classList.contains('busy')) return;
+    send.classList.add('busy'); send.firstElementChild.textContent = 'Enviando…'; s.setLevel(118);
+    setTimeout(() => { send.firstElementChild.textContent = 'Enviada'; }, 1700);
+    setTimeout(() => { s.setLevel(0); send.classList.remove('busy'); send.firstElementChild.textContent = 'Enviar propuesta'; }, 3400);
+  });
+  document.getElementById('again').addEventListener('click', run);
+  run();
+});
+</script>
+</body>
+</html>

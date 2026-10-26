@@ -1,0 +1,33 @@
+/* ELEMENT UI / Grilla viva. Colores por variables CSS: --eui-grid-cell debe coincidir con el fondo de tu página. */
+/* Las variables usan :where() (especificidad 0): cualquier clase tuya las sobrescribe. */
+:where(.eui-grid){
+  --eui-grid-line:rgba(23,24,26,.07);
+  --eui-grid-cell:#fbfafd;
+  --eui-grid-accent:#dd6330;
+  --eui-grid-label:#15152a;
+}
+.eui-grid{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:var(--eui-grid-cell);
+}
+.eui-grid>.eui-grid-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+.eui-grid>:not(.eui-grid-canvas):not(template){position:relative;z-index:1}
+
+/* Desvanecidos opcionales: data-grid-mask="radial" | "bottom" | "edges" */
+.eui-grid[data-grid-mask="radial"]>.eui-grid-canvas{-webkit-mask-image:radial-gradient(ellipse 80% 78% at 50% 48%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 80% 78% at 50% 48%,#000 55%,transparent 100%)}
+.eui-grid[data-grid-mask="bottom"]>.eui-grid-canvas{-webkit-mask-image:linear-gradient(#000 0,#000 62%,transparent 100%);mask-image:linear-gradient(#000 0,#000 62%,transparent 100%)}
+.eui-grid[data-grid-mask="edges"]>.eui-grid-canvas{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+
+/* Halo para que el texto se lea sobre la retícula */
+.eui-grid-halo{position:relative}
+.eui-grid-halo::before{content:"";position:absolute;inset:-40px -60px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at center,var(--eui-grid-cell) 45%,transparent 72%)}
+
+/* Tema oscuro: data-theme="dark" en <html> o en el componente, o el sistema si no se fuerza "light" */
+:where(:root[data-theme="dark"] .eui-grid:not([data-theme="light"]),.eui-grid[data-theme="dark"]){
+  --eui-grid-line:rgba(236,238,242,.075);--eui-grid-cell:#0f0e14;--eui-grid-accent:#f29a6b;--eui-grid-label:#15152a}
+@media (prefers-color-scheme:dark){
+  :where(:root:not([data-theme="light"]) .eui-grid:not([data-theme="light"])){
+    --eui-grid-line:rgba(236,238,242,.075);--eui-grid-cell:#0f0e14;--eui-grid-accent:#f29a6b;--eui-grid-label:#15152a}
+}

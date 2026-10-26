@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portafolio · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/cubes/element-cubes.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  :root{--bg:#f7f3ef;--ink:#15152a;--muted:#5d5e75;--line:rgba(21,21,42,.12);--acc:#dd6330}
+  body{background:var(--bg);color:var(--ink)}
+  .wrap{width:min(1180px,100%);margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+  nav.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+  nav.top b{font-weight:500;letter-spacing:-.01em}
+  nav.top div{display:flex;gap:22px;font-size:15px;color:var(--muted)}
+  nav.top a{text-decoration:none} nav.top a:hover{color:var(--acc)}
+  .tag{display:inline-block;font:500 11px/1 "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--acc);padding:7px 11px;border:1px solid rgba(221,99,48,.35);border-radius:999px}
+  section{padding:clamp(56px,8vw,110px) 0;border-top:1px solid var(--line)}
+  .hero{border-top:0;padding-top:clamp(40px,6vw,80px)}
+  .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:center}
+  .split.rev{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+  .split.rev .txt{order:2}
+  h1{margin:0;font-weight:200;font-size:clamp(52px,7.4vw,108px);line-height:.9;letter-spacing:-.055em}
+  h1 em,h2 em{font-style:normal;color:var(--acc)}
+  h2{margin:0;font-weight:200;font-size:clamp(38px,4.6vw,66px);line-height:.95;letter-spacing:-.045em}
+  p{color:var(--muted);font-size:17px;line-height:1.55;max-width:44ch}
+  .lede{font-size:clamp(18px,1.6vw,21px)}
+  .cta{display:inline-flex;align-items:center;gap:12px;margin-top:10px;height:50px;padding:0 22px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:500;transition:background .25s,color .25s}
+  .cta:hover{background:var(--acc);color:var(--ink)}
+  .list{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px;max-width:520px}
+  .list li{padding:12px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+  .list li span{display:block;color:var(--muted);font-size:13.5px}
+  .art{position:relative;height:440px}
+  .art.sm{height:360px}
+  .art .exhibit,.art .exhibit-scene{position:absolute;inset:0}
+  .note{font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.05em;text-transform:uppercase;color:#8586a0;margin-top:14px}
+  footer{background:var(--ink);color:#f4f3f6;border-radius:32px 32px 0 0;padding:clamp(48px,7vw,90px) 0 28px}
+  footer h2 em{color:#f29a6b}
+  footer p{color:#fbd9c3}
+  footer .base{margin-top:40px;padding-top:18px;border-top:1px solid rgba(244,243,246,.14);font-size:13.5px;color:rgba(244,243,246,.6)}
+  @media (max-width:900px){.split,.split.rev{grid-template-columns:1fr}.split.rev .txt{order:0}.art{height:340px}.art.sm{height:300px}nav.top div{display:none}}
+</style>
+<script defer src="../components/cubes/element-cubes.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="portafolio" data-variant="cubos">
+<div class="wrap">
+  <nav class="top"><b>Valeria Ortiz</b><div><a href="#habilidades">Habilidades</a><a href="#servicios">Servicios</a><a href="#empresas">Empresas</a><a href="#contacto">Contacto</a></div></nav>
+
+  <section class="hero" id="habilidades">
+    <div class="split">
+      <div class="txt">
+        <h1>Hago herramientas <em>a medida.</em></h1>
+        <p class="lede">Diseñadora y desarrolladora web. Paneles de gestión, tiendas e integraciones en código nativo. Cada cubo es una tecnología con la que trabajo: pasa el cursor y ábrelos.</p>
+        <a class="cta" href="#contacto">Hablemos →</a>
+      </div>
+      <div class="art">
+        <div class="exhibit" data-element-cubes data-eui-mode="interactive" data-eui-rows="5" data-eui-columns="7"
+             data-eui-size="70" data-eui-gap="12" data-eui-face="#f7f3ef" data-eui-border="#d9cfc6" data-eui-intro="true" tabindex="0" aria-label="Habilidades">
+          <template data-eui-items>
+          <span aria-label="HTML5" data-top="#ffffff" data-edge="#E34F26"><img src="../assets/icons/html5.svg" alt="HTML5"></span>
+          <span aria-label="CSS" data-top="#ffffff" data-edge="#663399"><img src="../assets/icons/css.svg" alt="CSS"></span>
+          <span aria-label="JavaScript" data-top="#ffffff" data-edge="#E2C000"><img src="../assets/icons/javascript.svg" alt="JavaScript"></span>
+          <span aria-label="PHP" data-top="#ffffff" data-edge="#777BB4"><img src="../assets/icons/php.svg" alt="PHP"></span>
+          <span aria-label="MySQL" data-top="#ffffff" data-edge="#4479A1"><img src="../assets/icons/mysql.svg" alt="MySQL"></span>
+          <span aria-label="React" data-top="#ffffff" data-edge="#149ECA"><img src="../assets/icons/react.svg" alt="React"></span>
+          <span aria-label="Node.js" data-top="#ffffff" data-edge="#5FA04E"><img src="../assets/icons/nodedotjs.svg" alt="Node.js"></span>
+          <span aria-label="Tailwind CSS" data-top="#ffffff" data-edge="#06B6D4"><img src="../assets/icons/tailwindcss.svg" alt="Tailwind CSS"></span>
+          <span aria-label="Figma" data-top="#ffffff" data-edge="#F24E1E"><img src="../assets/icons/figma.svg" alt="Figma"></span>
+          <span aria-label="n8n" data-top="#ffffff" data-edge="#EA4B71"><img src="../assets/icons/n8n.svg" alt="n8n"></span>
+          <span aria-label="Moodle" data-top="#ffffff" data-edge="#F98012"><img src="../assets/icons/moodle.svg" alt="Moodle"></span>
+          <span aria-label="WordPress" data-top="#ffffff" data-edge="#21759B"><img src="../assets/icons/wordpress.svg" alt="WordPress"></span>
+          <span aria-label="Python" data-top="#ffffff" data-edge="#3776AB"><img src="../assets/icons/python.svg" alt="Python"></span>
+          <span aria-label="Laravel" data-top="#ffffff" data-edge="#FF2D20"><img src="../assets/icons/laravel.svg" alt="Laravel"></span>
+          <span aria-label="Git" data-top="#ffffff" data-edge="#F03C2E"><img src="../assets/icons/git.svg" alt="Git"></span>
+          </template>
+          <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <div class="split rev">
+      <div class="txt">
+        <h2>Lo que puedo <em>construir contigo.</em></h2>
+        <ul class="list">
+          <li>Sitios web<span>Rápidos, a medida</span></li>
+          <li>Inteligencia artificial<span>Donde ahorra tiempo</span></li>
+          <li>Automatización<span>Flujos con n8n</span></li>
+          <li>Apps y PWA<span>Instalables, sin tienda</span></li>
+          <li>Tiendas en línea<span>Pagos e inventario</span></li>
+          <li>Paneles de gestión<span>Datos claros</span></li>
+        </ul>
+      </div>
+      <div class="art sm">
+        <div class="exhibit" data-element-cubes data-eui-mode="interactive" data-eui-rows="4" data-eui-columns="5"
+             data-eui-size="74" data-eui-gap="14" data-eui-face="#f7f3ef" data-eui-border="#d9cfc6" tabindex="0" aria-label="Servicios">
+          <template data-eui-items>
+          <span aria-label="Sitios web" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/srv-web.svg" alt="Sitios web"></span>
+          <span aria-label="Inteligencia artificial" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/srv-ia.svg" alt="Inteligencia artificial"></span>
+          <span aria-label="Automatización" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/srv-auto.svg" alt="Automatización"></span>
+          <span aria-label="Apps y PWA" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/srv-apps.svg" alt="Apps y PWA"></span>
+          <span aria-label="Tiendas en línea" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/srv-tienda.svg" alt="Tiendas en línea"></span>
+          <span aria-label="Paneles de gestión" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/srv-panel.svg" alt="Paneles de gestión"></span>
+          </template>
+          <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="empresas">
+    <div class="split">
+      <div class="txt">
+        <h2>Equipos que <em>confiaron</em> en mi trabajo.</h2>
+        <p>Cambia estos monogramas por los logotipos de tus clientes (con su permiso) y enlaza cada cubo a su caso de estudio.</p>
+        <p class="note">Empresas ficticias del ejemplo</p>
+      </div>
+      <div class="art sm">
+        <div class="exhibit" data-element-cubes data-eui-mode="interactive" data-eui-rows="3" data-eui-columns="5"
+             data-eui-size="80" data-eui-gap="16" data-eui-face="#f7f3ef" data-eui-border="#d9cfc6" tabindex="0" aria-label="Empresas">
+          <template data-eui-items>
+          <span aria-label="Lumen" data-top="#ffffff" data-edge="#15152A"><img src="../assets/icons/cliente-lumen.svg" alt="Lumen"></span>
+          <span aria-label="Atlas Logística" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/cliente-atlas.svg" alt="Atlas Logística"></span>
+          <span aria-label="Vértice" data-top="#ffffff" data-edge="#A9461D"><img src="../assets/icons/cliente-vertice.svg" alt="Vértice"></span>
+          <span aria-label="Norte" data-top="#ffffff" data-edge="#23264F"><img src="../assets/icons/cliente-norte.svg" alt="Norte"></span>
+          <span aria-label="Cumbre Edu" data-top="#ffffff" data-edge="#15152A"><img src="../assets/icons/cliente-cumbre.svg" alt="Cumbre Edu"></span>
+          </template>
+          <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer id="contacto">
+  <div class="wrap split">
+    <div class="txt">
+      <h2>¿Tienes un proyecto <em>en mente?</em></h2>
+      <p>Escríbeme por cualquiera de estos canales. Cada cubo es un enlace.</p>
+    </div>
+    <div class="art sm">
+      <div class="exhibit" data-element-cubes data-eui-mode="interactive" data-eui-rows="3" data-eui-columns="5"
+           data-eui-size="72" data-eui-gap="14" data-eui-face="#15152a" data-eui-border="#5b5a73" tabindex="0" aria-label="Redes y contacto">
+        <template data-eui-items>
+          <a href="https://wa.me/593996089704" target="_blank" aria-label="WhatsApp" data-top="#ffffff" data-edge="#25D366"><img src="../assets/icons/whatsapp.svg" alt="WhatsApp"></a>
+          <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" data-top="#ffffff" data-edge="#FF0069"><img src="../assets/icons/instagram.svg" alt="Instagram"></a>
+          <a href="https://github.com/" target="_blank" aria-label="GitHub" data-top="#ffffff" data-edge="#f4f3f6"><img src="../assets/icons/github.svg" alt="GitHub"></a>
+          <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn" data-top="#ffffff" data-edge="#0A66C2"><img src="../assets/icons/linkedin.svg" alt="LinkedIn"></a>
+          <a href="mailto:hola@ejemplo.com" target="_blank" aria-label="Correo" data-top="#ffffff" data-edge="#DD6330"><img src="../assets/icons/correo.svg" alt="Correo"></a>
+        </template>
+        <div class="exhibit-scene"><div class="co-cube-wall"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="base">Valeria Ortiz · Portafolio de ejemplo hecho con Element UI</div></div>
+</footer>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+</body>
+</html>

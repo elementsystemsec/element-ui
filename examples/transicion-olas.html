@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Transición con olas · Element UI</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../components/waves/element-waves.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* Escenas a pantalla completa. Entre una y otra, el agua tapa la pantalla, la escena cambia
+     detrás y el agua se va: hacia arriba o vaciándose hacia abajo. */
+  body{background:#15152a;color:#f4f3f6;overflow:hidden}
+  .scenes{position:fixed;inset:0}
+  .scene{position:absolute;inset:0;display:grid;align-content:end;padding:clamp(24px,5vw,72px);visibility:hidden}
+  .scene.on{visibility:visible}
+  .scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;transform:scale(1.08);transition:transform 6s cubic-bezier(.16,1,.3,1)}
+  .scene.on img{transform:scale(1)}
+  .scene::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(21,21,42,.9),rgba(21,21,42,.4) 55%,rgba(21,21,42,0) 85%)}
+  .scene h2{margin:0;font-weight:200;font-size:clamp(52px,9vw,140px);line-height:.88;letter-spacing:-.06em;max-width:10ch}
+  .scene h2 em{font-style:normal;color:#f29a6b}
+  .scene p{margin:18px 0 0;max-width:42ch;color:#fbd9c3;font-size:clamp(16px,1.4vw,19px)}
+  .scene.paper{background:#f7f3ef;color:#15152a}
+  .scene.paper::before{display:none}
+  .scene.paper p{color:#55566f}
+  .scene.paper h2 em{color:#dd6330}
+  .num{position:absolute;bottom:clamp(24px,5vw,72px);right:clamp(24px,5vw,72px);font:500 13px/1 'JetBrains Mono',monospace;color:inherit;opacity:.7}
+  .curtain{position:fixed;inset:0;z-index:10;pointer-events:none;--eui-waves-bg:transparent;--eui-waves-water:#dd6330;--eui-waves-foam:rgba(242,154,107,.85);--eui-waves-foam-2:rgba(251,217,195,.7)}
+  .ctrl{position:fixed;z-index:20;left:50%;top:20px;translate:-50% 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100% - 32px)}
+  .ctrl button{height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(244,243,246,.25);background:rgba(21,21,42,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#f4f3f6;font:500 14px/1 'Hanken Grotesk',sans-serif;cursor:pointer}
+  .ctrl button:hover{border-color:#f29a6b}
+  .ctrl .go{background:#dd6330;border-color:#dd6330;color:#15152a}
+  .ctrl [aria-pressed="true"]{background:#f4f3f6;color:#15152a}
+</style>
+<script defer src="../components/waves/element-waves.js"></script>
+<script defer src="variants.js"></script>
+</head>
+<body data-group="transicion" data-variant="olas">
+<div class="scenes" id="scenes">
+  <section class="scene on"><img src="../assets/photos/oleaje.webp" alt=""><span class="num">01 / 04</span><h2>Todo empieza <em>en el mar.</em></h2><p>Cada cambio de escena es una ola: tapa, cambia lo de atrás y se va.</p></section>
+  <section class="scene paper"><span class="num">02 / 04</span><h2>Luego, <em>papel.</em></h2><p>Funciona igual entre fotos, colores o páginas enteras. Es una promesa: espera a que el agua tape para cambiar.</p></section>
+  <section class="scene"><img src="../assets/photos/cumbre.webp" alt=""><span class="num">03 / 04</span><h2>Sube <em>o baja.</em></h2><p>El agua puede salir por arriba o vaciarse hacia abajo. Elige abajo cómo quieres que se vaya.</p></section>
+  <section class="scene"><img src="../assets/photos/noche.webp" alt=""><span class="num">04 / 04</span><h2>Y vuelve <em>a empezar.</em></h2><p>Úsalo para presentaciones, pasos de un registro o el cambio entre páginas.</p></section>
+</div>
+<div class="curtain" id="curtain" data-element-waves data-waves-level="-25" data-waves-curve="medium" data-waves-speed="1.3"></div>
+<div class="ctrl" role="group" aria-label="Transición">
+  <button type="button" data-mode="up" aria-pressed="true">Sube y sale por arriba</button>
+  <button type="button" data-mode="down" aria-pressed="false">Sube y se vacía</button>
+  <button type="button" data-mode="fall" aria-pressed="false">Cae desde arriba</button>
+  <button type="button" class="go" id="go">Siguiente escena →</button>
+</div>
+<a class="ex-back" href="index.html">← Ejemplos</a>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const curtain = ElementUI.Waves.get(document.getElementById('curtain'));
+  const scenes = [...document.querySelectorAll('.scene')];
+  const modes = document.querySelectorAll('[data-mode]');
+  let i = 0, mode = 'up', busy = false;
+  const MODES = {
+    up:   [{ from: 'bottom' }, { exit: 'up' }],
+    down: [{ from: 'bottom' }, { exit: 'down' }],
+    fall: [{ from: 'top' },    { exit: 'down' }]
+  };
+  async function next(step = 1) {
+    if (busy) return; busy = true;
+    const [inn, out] = MODES[mode];
+    await curtain.cover({ ...inn, ms: 850 });
+    scenes[i].classList.remove('on');
+    i = (i + step + scenes.length) % scenes.length;
+    scenes[i].classList.add('on');
+    await curtain.uncover({ ...out, ms: 950 });
+    busy = false;
+  }
+  document.getElementById('go').addEventListener('click', () => next());
+  modes.forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode; modes.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  }));
+  addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(1); }
+    if (e.key === 'ArrowLeft') next(-1);
+  });
+  // Dentro de la galería del catálogo avanza solo
+  if (document.documentElement.classList.contains('in-frame') && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+    setInterval(() => { if (!document.hidden) next(); }, 4200);
+});
+</script>
+</body>
+</html>
